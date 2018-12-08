@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This example is an end to end example of a generic supply chain process blockchain based, using the Convector Framework (https://worldsibu.github.io/convector/)
+This project is an end to end example of a generic supply chain process blockchain based, using the Convector Framework (https://worldsibu.github.io/convector/)
 
 As stated on the site:
 
