@@ -902,7 +902,7 @@ It takes as inputs 4 parameters:
 + user name
 + controller name
 
-In our case chaincode anme and controller name are the same so a sample invocation is:
+In our case chaincode name and controller name are the same so a sample invocation is:
 ```
 npm run cc:invoke -- supplychainchaincode org1 user1 supplychainchaincode createSupplier '{"id":"SPL_1","name":"supplier1","rawMaterialAvailable":2000}'
 ```
