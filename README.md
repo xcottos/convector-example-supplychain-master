@@ -947,7 +947,7 @@ To read the messages written on the console via the invocations of the ``console
 
 This is done with the command ``docker logs`` that accepts as parameter the id of the container that you saw as part of the output of the ``docker ps -a`` command.
 
-In our scenario we use **bdf95fa3e0dc** that corresponds to **dev-peer0.org1.example.com-supplychainchaincode-1**
+In our scenario we use **bdf95fa3e0dc** that corresponds to **dev-peer0.org2.example.com-supplychainchaincode-1**
 
 so the command will be:
 ```
