@@ -31,8 +31,7 @@ The entities that participate in this project are:
 	+ buys the **Products** from the **Retailers**
 
 The high level sequence is described below:
-
-&lt;placeholder image main process&gt;
+![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/supply-chain.bpmn.png "Fetch Raw Material")
 
 ## Implementation
 
@@ -232,7 +231,7 @@ Now we need to add the variables that are specific for every Model:
 	+ productsBought: is a number that expresses the quantity of products bought
 
 So the **Supplier.model.ts** shoud now look like:
-```
+```javascript
 import * as yup from 'yup';
 import {
   ConvectorModel,
@@ -268,7 +267,7 @@ export class Supplier extends ConvectorModel<Supplier> {
 ```
 
 The **Manufacturer.model.ts** shoud now look like:
-```
+```javascript
 import * as yup from 'yup';
 import {
   ConvectorModel,
@@ -307,7 +306,7 @@ export class Manufacturer extends ConvectorModel<Manufacturer> {
 }
 ```
 The **Distributor.model.ts** shoud now look like:
-```
+```javascript
 import * as yup from 'yup';
 import {
   ConvectorModel,
@@ -350,7 +349,7 @@ export class Distributor extends ConvectorModel<Distributor> {
 
 ```
 The **Retailer.model.ts** shoud now look like:
-```
+```javascript
 import * as yup from 'yup';
 import {
   ConvectorModel,
@@ -390,7 +389,7 @@ export class Retailer extends ConvectorModel<Retailer> {
   @Validate(yup.number())
   public productsSold: number;
 }
-```
+```javascript
 The **Customer.model.ts** shoud now look like:
 ```
 import * as yup from 'yup';
@@ -435,28 +434,28 @@ For the Controller I will modify directly on the file called **supplychainchainc
 The Controller will contain all the logic for implementing the actions described in the **Use Case** section; specifically will contain the implementation of all the following **functions** that implement the logic:
 
 **fetchRawMaterial:**
-![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/images/fetchRawMaterial.png "Fetch Raw Material")
+![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/fetchRawMaterial.png "Fetch Raw Material")
 
 **getRawMaterialFromSupplier:**
-![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/images/getRawMaterial.png "Fetch Raw Material")
+![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/getRawMaterial.png "Fetch Raw Material")
 
 **createProducts:**
-![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/images/createProducts.png "Fetch Raw Material")
+![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/createProducts.png "Fetch Raw Material")
 
 **sendProductsToDistribution:**
-![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/images/sendProductsToDistribution.png "Fetch Raw Material")
+![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/sendProductsToDistribution.png "Fetch Raw Material")
 
 
 **orderProductsFromDistributor:**
-![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/images/orderShipProducts.png "Fetch Raw Material")
+![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/images/orderShipProducts.png "Fetch Raw Material")
 
 
 **receiveProductsFromDistributor:**
-![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/images/receiveProducts.png "Fetch Raw Material")
+![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/images/receiveProducts.png "Fetch Raw Material")
 
 
 **buyProductsFromRetailer:**
-![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/images/buyProducts.png "Fetch Raw Material")
+![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/images/buyProducts.png "Fetch Raw Material")
 
 Together with these functions I created also others that are used as helpers:
 
@@ -476,7 +475,7 @@ The implementation of the Controller is quite straight forward once there are fe
 
 Since in the Controller we manage Models the first step is understanding more in deep what a Model is as class: every Model extends a class called ConvectorModel&lt;T&gt; and you can read its definition in the file **node_modules/@worldsibu/convector-core-model/dist/src/convector-model.d.ts**
 
-```
+```javascript
 import * as yup from 'yup';
 export declare type FlatConvectorModel<T> = {
     [L in Exclude<keyof T, keyof ConvectorModel<any>>]: T[L];
@@ -523,7 +522,7 @@ And the field **id** that **must be set** when an instance of a Model is created
 If we now we analyze one of the methods in the Controller for creating a Model we can see already the usage of some of them:
 
 **createSupplier**
-```
+```javascript
 @Invokable()
   public async createSupplier(
     @Param(Supplier)
@@ -547,7 +546,7 @@ All these methods follow the **async/await** pattern to be syncronous.
 
 Another example to be explained is a function that impacts on Models that have been already stored in the ledger, like the **getRawMaterialFromSupplier** that is used to transfer raw material from the Supplier to the Manufacturer:
 
-```
+```javascript
 @Invokable()
   public async getRawMaterialFromSupplier(
     @Param(yup.string())
@@ -575,7 +574,7 @@ This function:
 All the functions are using these methods.
 
 The file **supplychainchaincode.controller.ts** should look like this:
-```
+```javascript
 import * as yup from 'yup';
 import {
   Controller,
