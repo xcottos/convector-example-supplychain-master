@@ -947,11 +947,11 @@ To read the messages written on the console via the invocations of the ``console
 
 This is done with the command ``docker logs`` that accepts as parameter the id of the container that you saw as part of the output of the ``docker ps -a`` command.
 
-In our scenario we use **3894275b6094** that corresponds to **dev-peer0.org1.example.com-supplychainchaincode-1**
+In our scenario we use **bdf95fa3e0dc** that corresponds to **dev-peer0.org1.example.com-supplychainchaincode-1**
 
 so the command will be:
 ```
-docker logs 3894275b6094 -f
+docker logs bdf95fa3e0dc -f
 ```
 Running this command you will see all the logs of the container in real time. It will show also all the past logs.
 
