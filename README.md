@@ -78,7 +78,7 @@ the line to add is the following:
 ```
 so at the end your file should look like
 
-```
+```javascript
 {
   "name": "supplychain",
   "version": "0.1.0",
@@ -957,7 +957,7 @@ Running this command you will see all the logs of the container in real time. It
 
 The last command output is the print of all the Models that shows the status of each of them after the execution of the end to end scenario:
 
-```
+```javascript
 debug: [Chaincode] ============= START : supplychainchaincode_getAllModels ===========
 info: [Chaincode] Args: supplychainchaincode_getAllModels
 debug: [StubHelper] Query: {"selector":{"type":"io.worldsibu.Customer"}}
