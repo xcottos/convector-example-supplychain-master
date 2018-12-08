@@ -1,4 +1,4 @@
-
+.convector-dev-env/
 node_modules/
 chaincode/
 packages/supplychainchaincode-cc/dist
