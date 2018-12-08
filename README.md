@@ -603,10 +603,7 @@ export class SupplychainchaincodeController extends ConvectorController {
     @Param(Supplier)
     supplier: Supplier
   ) {
-
-
     await supplier.save();
-
 
     const storedSuppliers = await Supplier.getAll('io.worldsibu.Supplier');
     console.log(storedSuppliers);
@@ -617,10 +614,7 @@ export class SupplychainchaincodeController extends ConvectorController {
     @Param(Manufacturer)
     manufacturer: Manufacturer
   ) {
-
-
     await manufacturer.save();
-
 
     const storedManufacturers = await Manufacturer.getAll('io.worldsibu.Manufacturer');
     console.log(storedManufacturers);
@@ -631,10 +625,7 @@ export class SupplychainchaincodeController extends ConvectorController {
     @Param(Distributor)
     distributor: Distributor
   ) {
-
-
     await distributor.save();
-
 
     const storedDistributors = await Distributor.getAll('io.worldsibu.Distributor');
     console.log(storedDistributors);
@@ -645,10 +636,7 @@ export class SupplychainchaincodeController extends ConvectorController {
     @Param(Retailer)
     retailer: Retailer
   ) {
-
-
     await retailer.save();
-
 
     const storedRetailers = await Retailer.getAll('io.worldsibu.Retailer');
     console.log(storedRetailers);
@@ -659,10 +647,7 @@ export class SupplychainchaincodeController extends ConvectorController {
     @Param(Customer)
     customer: Customer
   ) {
-
-
     await customer.save();
-
 
     const storedCustomers = await Customer.getAll('io.worldsibu.Customer');
     console.log(storedCustomers);
