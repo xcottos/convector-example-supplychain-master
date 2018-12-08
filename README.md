@@ -1021,6 +1021,6 @@ docker logs $(docker ps -qa | head -n 1) -f
 ```
 ## Next steps
 + Writing a Node client
-+ Writing an API layer (probably first with Express and then exploring more complex situations like trying to use the Models typescript to be used in Loopback for generating the API. Have to see how complex it is..)
++ Writing an API layer (probably first with Express and then exploring more complex situations like trying to use the Models typescript as Loopback Models for generating the API. Have to see how complex it is..)
 + Deploying on an existant Hyperledger network (thinking about upgrading the dev-env too at this point.. to be discussed)
 + Authentication
