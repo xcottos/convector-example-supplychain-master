@@ -525,10 +525,7 @@ If we now we analyze one of the methods in the Controller for creating a Model w
     @Param(Supplier)
     supplier: Supplier
   ) {
-
-
     await supplier.save();
-
 
     const storedSuppliers = await Supplier.getAll('io.worldsibu.Supplier');
     console.log(storedSuppliers);
