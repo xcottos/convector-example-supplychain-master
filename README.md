@@ -389,9 +389,9 @@ export class Retailer extends ConvectorModel<Retailer> {
   @Validate(yup.number())
   public productsSold: number;
 }
-```javascript
-The **Customer.model.ts** shoud now look like:
 ```
+The **Customer.model.ts** shoud now look like:
+```javascript
 import * as yup from 'yup';
 import {
   ConvectorModel,
