@@ -1,6 +1,6 @@
-#convector-example-supplychain-master
+# convector-example-supplychain-master
 
-##Introduction
+## Introduction
 
 This example is an end to end example of a generic supply chain process blockchain based, using the Convector Framework (https://worldsibu.github.io/convector/)
 
@@ -10,7 +10,7 @@ As stated on the site:
 
 The goal of this project is to explain the process for creating a working end to end and to  be a baseline for discussion about the best practices of usage of this promising framework.
 
-##Use Case
+## Use Case
 
 The use case is a simple representation of a generic supply chain process where the lifecycle of a **Product** is tracked from the extraction of the raw material to make it, until its selling by the **Retailers** .
 
@@ -34,7 +34,7 @@ The high level sequence is described below:
 
 &lt;placeholder image main process&gt;
 
-##Implementation
+## Implementation
 
 This example starts from the installation of the following pre-requisites (there are also the exact versions I'm actually using):
 
@@ -47,7 +47,7 @@ This example starts from the installation of the following pre-requisites (there
 
 The following paragraphs describe the procedure to generate this  project from the end to end.
 
-###Project Init
+### Project Init
 
 First, the convector-cli package must be installed globally:
 
@@ -172,7 +172,7 @@ We can see there is:
 
 Now, the last lines printed as output of the command are the registration of some users in the organizations (**org1** and **org2**) via the certificate authorities that we'll use for interacting with the system; if there are no errors on screen it should be all ok.
 
-###Model/Controller pattern
+### Model/Controller pattern
 
 The Convector framework approach follows the Model/Controller pattern that is well explained on the site:
 
@@ -188,7 +188,7 @@ You will see that 2 files have been created:
 + supplychainchaincode.controller.ts (a sample Controller)
 
 
-####Models
+#### Models
 with the ``conv generate`` command we now generate the stubs of our Models.
 
 ```
@@ -429,7 +429,7 @@ You can notice that there are no validations but the type ones. I will take care
 
 Now that the Models have been created it's time to implement the logic.
 
-####Controller
+#### Controller
 For the Controller I will modify directly on the file called **supplychainchaincode.controller.ts** to keep the standard naming of the Controller in this folder
 
 The Controller will contain all the logic for implementing the actions described in the **Use Case** section; specifically will contain the implementation of all the following **functions** that implement the logic:
@@ -847,7 +847,7 @@ export class SupplychainchaincodeController extends ConvectorController {
 }
 ```
 
-##Installation and execution of the code
+## Installation and execution of the code
 Once the Models and Controller have been written, you have to go back to the root folder (**supplychain**) and run  the command ``npm i``
 
 If there are no errors you should see the output that tells you the chaincode called **supplychainchaincode-cc@0.1.0** has been processed (generating the client, the controller interface etc.)
@@ -911,7 +911,7 @@ bdf95fa3e0dc        dev-peer0.org2.example.com-supplychainchaincode-1-9aa5c49422
 ```
 That are the 2 containers, one per organization, called ``dev-peer0.org1.example.com-supplychainchaincode-1`` and ``dev-peer0.org2.example.com-supplychainchaincode-1``  that are running the chaincode.
 
-##Interaction with the chaincode
+## Interaction with the chaincode
 For interacting with the chaincode we'll use the command ``npm run cc:invoke`` that is defined in the package.json as:
 ```
 "cc:invoke": "f() { chaincode-manager --config ./$2.$1.config.json --user $3 invoke $1 ${@:4}; }; f"
@@ -1040,8 +1040,8 @@ If you don't have a specific docker situation, the first image you display with 
 ```
 docker logs $(docker ps -qa | head -n 1) -f
 ```
-##Next steps
+## Next steps
 + Writing a Node client
 + Writing an API layer (probably first with Express and then exploring more complex situations like trying to use the Models typescript to be used in Loopback for generating the API. Have to see how complex it is..)
 + Deploying on an existant Hyperledger network (thinking about upgrading the dev-env too at this point.. to be discussed)
-+ Authentication 
++ Authentication
