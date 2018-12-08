@@ -446,13 +446,13 @@ The Controller will contain all the logic for implementing the actions described
 ![Send Products to Distribution](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/sendsProductsToDistribution.png "Send Products to Distribution")
 
 **orderProductsFromDistributor:**
-![Order Products](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/images/orderShipProducts.png "Order Products")
+![Order Products](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/orderShipProducts.png "Order Products")
 
 **receiveProductsFromDistributor:**
-![Receive Products](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/images/receiveProducts.png "Receive Products")
+![Receive Products](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/receiveProducts.png "Receive Products")
 
 **buyProductsFromRetailer:**
-![Buy Products](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/images/buyProducts.png "Buy Products")
+![Buy Products](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/buyProducts.png "Buy Products")
 
 Together with these functions I created also others that are used as helpers:
 
