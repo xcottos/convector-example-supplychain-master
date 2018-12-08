@@ -526,9 +526,9 @@ If we now we analyze one of the methods in the Controller for creating a Model w
     supplier: Supplier
   ) {
 
-    console.log("prima await")
+
     await supplier.save();
-    console.log("dopo await")
+
 
     const storedSuppliers = await Supplier.getAll('io.worldsibu.Supplier');
     console.log(storedSuppliers);
@@ -604,9 +604,9 @@ export class SupplychainchaincodeController extends ConvectorController {
     supplier: Supplier
   ) {
 
-    console.log("prima await")
+
     await supplier.save();
-    console.log("dopo await")
+
 
     const storedSuppliers = await Supplier.getAll('io.worldsibu.Supplier');
     console.log(storedSuppliers);
@@ -618,9 +618,9 @@ export class SupplychainchaincodeController extends ConvectorController {
     manufacturer: Manufacturer
   ) {
 
-    console.log("prima await")
+
     await manufacturer.save();
-    console.log("dopo await")
+
 
     const storedManufacturers = await Manufacturer.getAll('io.worldsibu.Manufacturer');
     console.log(storedManufacturers);
@@ -632,9 +632,9 @@ export class SupplychainchaincodeController extends ConvectorController {
     distributor: Distributor
   ) {
 
-    console.log("prima await")
+
     await distributor.save();
-    console.log("dopo await")
+
 
     const storedDistributors = await Distributor.getAll('io.worldsibu.Distributor');
     console.log(storedDistributors);
@@ -646,9 +646,9 @@ export class SupplychainchaincodeController extends ConvectorController {
     retailer: Retailer
   ) {
 
-    console.log("prima await")
+
     await retailer.save();
-    console.log("dopo await")
+
 
     const storedRetailers = await Retailer.getAll('io.worldsibu.Retailer');
     console.log(storedRetailers);
@@ -660,9 +660,9 @@ export class SupplychainchaincodeController extends ConvectorController {
     customer: Customer
   ) {
 
-    console.log("prima await")
+
     await customer.save();
-    console.log("dopo await")
+
 
     const storedCustomers = await Customer.getAll('io.worldsibu.Customer');
     console.log(storedCustomers);
