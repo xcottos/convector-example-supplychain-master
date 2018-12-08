@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0kywxh7" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="Collaboration_096zr8k">
+    <bpmn:participant id="Participant_1kcb2cj" processRef="Process_1" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_0lnnyle">
+      <bpmn:lane id="Lane_0cgpnb2" name="Manufacturer">
+        <bpmn:flowNodeRef>Task_1i5x69k</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_1rmq33k" name="Distributor">
+        <bpmn:flowNodeRef>Task_1jlio5x</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:task id="Task_1i5x69k" name="Send Products To Distribution">
+      <bpmn:outgoing>SequenceFlow_0m5fnlk</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_1jlio5x" name="Delivery Cycle">
+      <bpmn:incoming>SequenceFlow_0m5fnlk</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_0m5fnlk" sourceRef="Task_1i5x69k" targetRef="Task_1jlio5x" />
+    <bpmn:textAnnotation id="TextAnnotation_18z69o6">
+      <bpmn:text>With the function sendProductsToDistribution(manufacturerId:string, distributorId:string, sentProducts:number) the Manufacturer sends an amount of products to the Distributor that will take care of shipping them. This operation reduces the available products of the Manufacturer </bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0lk1696" sourceRef="Task_1i5x69k" targetRef="TextAnnotation_18z69o6" />
+    <bpmn:association id="Association_0c6516s" sourceRef="Task_1jlio5x" targetRef="TextAnnotation_0rcrmwc" />
+    <bpmn:textAnnotation id="TextAnnotation_0rcrmwc">
+      <bpmn:text>When the Distributor receives the products increases the products to be shipped variable (productsToBeShipped)</bpmn:text>
+    </bpmn:textAnnotation>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_096zr8k">
+      <bpmndi:BPMNShape id="Participant_1kcb2cj_di" bpmnElement="Participant_1kcb2cj">
+        <dc:Bounds x="116" y="75" width="617" height="272" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_1i5x69k_di" bpmnElement="Task_1i5x69k">
+        <dc:Bounds x="301" y="110" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0cgpnb2_di" bpmnElement="Lane_0cgpnb2">
+        <dc:Bounds x="146" y="75" width="587" height="147" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1rmq33k_di" bpmnElement="Lane_1rmq33k">
+        <dc:Bounds x="146" y="222" width="587" height="125" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_1jlio5x_di" bpmnElement="Task_1jlio5x">
+        <dc:Bounds x="301" y="251" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0m5fnlk_di" bpmnElement="SequenceFlow_0m5fnlk">
+        <di:waypoint x="351" y="190" />
+        <di:waypoint x="351" y="251" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_18z69o6_di" bpmnElement="TextAnnotation_18z69o6">
+        <dc:Bounds x="424" y="95" width="294" height="110" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0lk1696_di" bpmnElement="Association_0lk1696">
+        <di:waypoint x="401" y="150" />
+        <di:waypoint x="424" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_0rcrmwc_di" bpmnElement="TextAnnotation_0rcrmwc">
+        <dc:Bounds x="422" y="259" width="275" height="54" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0c6516s_di" bpmnElement="Association_0c6516s">
+        <di:waypoint x="401" y="290" />
+        <di:waypoint x="422" y="289" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

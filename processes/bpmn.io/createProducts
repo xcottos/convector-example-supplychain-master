@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1k6rg72" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="Collaboration_0y6s1yr">
+    <bpmn:participant id="Participant_1eq9e5p" name="Manufacturer" processRef="Process_1" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:task id="Task_1tfbd9v" name="Create Products">
+      <bpmn:incoming>SequenceFlow_0vmm5jz</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0vmm5jz</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_0vmm5jz" sourceRef="Task_1tfbd9v" targetRef="Task_1tfbd9v" />
+    <bpmn:association id="Association_0rsl7c3" sourceRef="Task_1tfbd9v" targetRef="TextAnnotation_1j6o7rk" />
+    <bpmn:textAnnotation id="TextAnnotation_1j6o7rk">
+      <bpmn:text>With the function createProducts(manufacturerId:string, rawMaterialConsumed:number, productsCreated:number) the Manufacturer produces products using the raw material</bpmn:text>
+    </bpmn:textAnnotation>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0y6s1yr">
+      <bpmndi:BPMNShape id="Participant_1eq9e5p_di" bpmnElement="Participant_1eq9e5p">
+        <dc:Bounds x="123" y="44" width="585" height="179" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_1tfbd9v_di" bpmnElement="Task_1tfbd9v">
+        <dc:Bounds x="259" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0vmm5jz_di" bpmnElement="SequenceFlow_0vmm5jz">
+        <di:waypoint x="309" y="160" />
+        <di:waypoint x="309" y="180" />
+        <di:waypoint x="239" y="180" />
+        <di:waypoint x="239" y="120" />
+        <di:waypoint x="259" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_1j6o7rk_di" bpmnElement="TextAnnotation_1j6o7rk">
+        <dc:Bounds x="388" y="79" width="300" height="82" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0rsl7c3_di" bpmnElement="Association_0rsl7c3">
+        <di:waypoint x="359" y="120" />
+        <di:waypoint x="388" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

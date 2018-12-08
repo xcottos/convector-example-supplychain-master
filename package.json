@@ -1,0 +1,32 @@
+{
+  "name": "supplychain",
+  "version": "0.1.0",
+  "description": "Bootstrap project for Chaincodes supplychain",
+  "files": [
+    "dist/*"
+  ],
+  "scripts": {
+    "install": "npm-run-all -s lerna:install",
+    "env:restart": "./node_modules/@worldsibu/convector-tool-dev-env/scripts/restart.sh",
+    "env:clean": "./node_modules/@worldsibu/convector-tool-dev-env/scripts/clean.sh",
+    "cc:start": "f() { npm-run-all -s \"cc:package -- $1 org1\" \"cc:install -- $1 $2 org1\" \"cc:install -- $1 $2 org2\" \"cc:instantiate -- $1 $2 org1\"; }; f",
+    "cc:upgrade": "f() { npm-run-all -s \"cc:package -- $1 org1\" \"cc:install -- $1 $2 org1\" \"cc:install -- $1 $2 org2\" \"cc:upgradePerOrg -- $1 $2\"; }; f",
+    "===================INTERNALS===================": "===================NO NEED TO CALL THEM DIRECTLY===================",
+    "lerna:install": "lerna bootstrap",
+    "lerna:build": "lerna run build",
+    "cc:package": "f() { npm run lerna:build; chaincode-manager --config ./$2.$1.config.json --output ./chaincode package; }; f",
+    "cc:install": "f() { chaincode-manager --config ./$3.$1.config.json install ./chaincode $1 $2; }; f",
+    "cc:instantiate": "f() { chaincode-manager --config ./$3.$1.config.json instantiate $1 $2; }; f",
+    "cc:upgradePerOrg": "f() { chaincode-manager --config ./org1.$1.config.json upgrade $1 $2; }; f",
+    "cc:invoke": "f() { chaincode-manager --config ./$2.$1.config.json --user $3 invoke $1 ${@:4}; }; f"
+  },
+  "devDependencies": {
+    "lerna": "^3.4.3",
+    "@worldsibu/convector-adapter-mock": "^1.2.0",
+    "@worldsibu/convector-tool-chaincode-manager": "^1.2.0",
+    "@worldsibu/convector-tool-dev-env": "^1.2.0",
+    "fabric-ca-client": "~1.1.2",
+    "fabric-client": "~1.1.2",
+    "npm-run-all": "^4.1.5"
+  }
+}

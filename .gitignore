@@ -1,0 +1,5 @@
+
+node_modules/
+chaincode/
+packages/supplychainchaincode-cc/dist
+packages/supplychainchaincode-cc/client

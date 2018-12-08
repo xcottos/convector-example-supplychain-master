@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_18vp2p5" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="Collaboration_1tnp5bf">
+    <bpmn:participant id="Participant_1qcumpw" processRef="Process_1" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_1favyrv">
+      <bpmn:lane id="Lane_0v7swzp" name="Manufacturer">
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_1h5za7i</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_1x9879a" name="Supplier">
+        <bpmn:flowNodeRef>Task_0lxhylw</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_0prtfl3</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Task_1h5za7i" name="Get Raw Material">
+      <bpmn:incoming>SequenceFlow_0prtfl3</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_12i4pl2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_0prtfl3" sourceRef="StartEvent_1" targetRef="Task_1h5za7i" />
+    <bpmn:sequenceFlow id="SequenceFlow_12i4pl2" sourceRef="Task_1h5za7i" targetRef="Task_0lxhylw" />
+    <bpmn:task id="Task_0lxhylw" name="Decrease the amount of rawMaterialAvailable">
+      <bpmn:incoming>SequenceFlow_12i4pl2</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:association id="Association_0osvde8" sourceRef="Task_1h5za7i" targetRef="TextAnnotation_1qpm22r" />
+    <bpmn:textAnnotation id="TextAnnotation_1qpm22r">
+      <bpmn:text>With the function getRawMaterialFromSupplier(manufacturerId:string, supplierId:string, rawMaterialSupply: number) the Manufacturer gets raw material supply from the Supplier</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_06f1559" sourceRef="Task_0lxhylw" targetRef="TextAnnotation_033x92w" />
+    <bpmn:textAnnotation id="TextAnnotation_033x92w">
+      <bpmn:text>The Supplier decreases the amount available of raw material </bpmn:text>
+    </bpmn:textAnnotation>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1tnp5bf">
+      <bpmndi:BPMNShape id="Participant_1qcumpw_di" bpmnElement="Participant_1qcumpw">
+        <dc:Bounds x="120" y="79" width="703" height="253" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="227" y="124" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0v7swzp_di" bpmnElement="Lane_0v7swzp">
+        <dc:Bounds x="150" y="79" width="673" height="128" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1x9879a_di" bpmnElement="Lane_1x9879a">
+        <dc:Bounds x="150" y="207" width="673" height="125" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_1h5za7i_di" bpmnElement="Task_1h5za7i">
+        <dc:Bounds x="313" y="102" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0prtfl3_di" bpmnElement="SequenceFlow_0prtfl3">
+        <di:waypoint x="263" y="142" />
+        <di:waypoint x="313" y="142" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Task_0lxhylw_di" bpmnElement="Task_0lxhylw">
+        <dc:Bounds x="313" y="233" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_12i4pl2_di" bpmnElement="SequenceFlow_12i4pl2">
+        <di:waypoint x="363" y="182" />
+        <di:waypoint x="363" y="233" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_1qpm22r_di" bpmnElement="TextAnnotation_1qpm22r">
+        <dc:Bounds x="428" y="101" width="351" height="85" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0osvde8_di" bpmnElement="Association_0osvde8">
+        <di:waypoint x="413" y="142" />
+        <di:waypoint x="428" y="143" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_033x92w_di" bpmnElement="TextAnnotation_033x92w">
+        <dc:Bounds x="431" y="234" width="372" height="81" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_06f1559_di" bpmnElement="Association_06f1559">
+        <di:waypoint x="413" y="274" />
+        <di:waypoint x="431" y="274" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1j6oqyy" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="Collaboration_1n4q43d">
+    <bpmn:participant id="Participant_0mel6f8" processRef="Process_1" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_082iy0p">
+      <bpmn:lane id="Lane_1ehcbgd" name="Retailer">
+        <bpmn:flowNodeRef>Task_0dp9lyc</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_1j7x0ry" name="Distributor">
+        <bpmn:flowNodeRef>Task_1s9ugkb</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:task id="Task_0dp9lyc" name="Order Products">
+      <bpmn:outgoing>SequenceFlow_0kcquc6</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_0kcquc6" sourceRef="Task_0dp9lyc" targetRef="Task_1s9ugkb" />
+    <bpmn:task id="Task_1s9ugkb" name="Ship Products">
+      <bpmn:incoming>SequenceFlow_0kcquc6</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:association id="Association_0w4n9k7" sourceRef="Task_0dp9lyc" targetRef="TextAnnotation_15in88h" />
+    <bpmn:textAnnotation id="TextAnnotation_15in88h">
+      <bpmn:text>With the function orderProducts(retailerId:string, distributorId:string,productsOrdered:number) the Retailer orders a specific amount of products. that increases the value of productsOrdered</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0g1now9" sourceRef="Task_1s9ugkb" targetRef="TextAnnotation_0j45jtc" />
+    <bpmn:textAnnotation id="TextAnnotation_0j45jtc">
+      <bpmn:text>When the products are ordered from the Retailer they are automatically shipped by the distributor</bpmn:text>
+    </bpmn:textAnnotation>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1n4q43d">
+      <bpmndi:BPMNShape id="Participant_0mel6f8_di" bpmnElement="Participant_0mel6f8">
+        <dc:Bounds x="89" y="40" width="699" height="246" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1ehcbgd_di" bpmnElement="Lane_1ehcbgd">
+        <dc:Bounds x="119" y="40" width="669" height="121" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1j7x0ry_di" bpmnElement="Lane_1j7x0ry">
+        <dc:Bounds x="119" y="161" width="669" height="125" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_0dp9lyc_di" bpmnElement="Task_0dp9lyc">
+        <dc:Bounds x="212" y="60" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_1s9ugkb_di" bpmnElement="Task_1s9ugkb">
+        <dc:Bounds x="212" y="184" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0kcquc6_di" bpmnElement="SequenceFlow_0kcquc6">
+        <di:waypoint x="262" y="140" />
+        <di:waypoint x="262" y="184" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_15in88h_di" bpmnElement="TextAnnotation_15in88h">
+        <dc:Bounds x="324" y="62" width="364" height="68" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0w4n9k7_di" bpmnElement="Association_0w4n9k7">
+        <di:waypoint x="312" y="99" />
+        <di:waypoint x="324" y="99" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_0j45jtc_di" bpmnElement="TextAnnotation_0j45jtc">
+        <dc:Bounds x="324" y="187" width="407" height="76" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0g1now9_di" bpmnElement="Association_0g1now9">
+        <di:waypoint x="312" y="224" />
+        <di:waypoint x="324" y="224" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
