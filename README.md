@@ -31,7 +31,7 @@ The entities that participate in this project are:
 	+ buys the **Products** from the **Retailers**
 
 The high level sequence is described below:
-![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/supply-chain.bpmn.png "Fetch Raw Material")
+![Supply Chain](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/supply-chain.bpmn.png "Supply Chain")
 
 ## Implementation
 
@@ -437,25 +437,22 @@ The Controller will contain all the logic for implementing the actions described
 ![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/fetchRawMaterial.png "Fetch Raw Material")
 
 **getRawMaterialFromSupplier:**
-![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/getRawMaterial.png "Fetch Raw Material")
+![Get Raw Material](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/getRawMaterial.png "Get Raw Material")
 
 **createProducts:**
-![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/createProducts.png "Fetch Raw Material")
+![Create Products](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/createProducts.png "Create Products")
 
 **sendProductsToDistribution:**
-![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/sendProductsToDistribution.png "Fetch Raw Material")
-
+![Send Products to Distribution](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/sendsProductsToDistribution.png "Send Products to Distribution")
 
 **orderProductsFromDistributor:**
-![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/images/orderShipProducts.png "Fetch Raw Material")
-
+![Order Products](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/images/orderShipProducts.png "Order Products")
 
 **receiveProductsFromDistributor:**
-![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/images/receiveProducts.png "Fetch Raw Material")
-
+![Receive Products](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/images/receiveProducts.png "Receive Products")
 
 **buyProductsFromRetailer:**
-![Fetch Raw Material](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/images/buyProducts.png "Fetch Raw Material")
+![Buy Products](https://github.com/xcottos/convector-example-supplychain-master/blob/master/images/images/buyProducts.png "Buy Products")
 
 Together with these functions I created also others that are used as helpers:
 
