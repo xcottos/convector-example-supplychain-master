@@ -918,6 +918,7 @@ In the folder **packages/supplychainchaincode-cc/script/** there's a file called
 	+ 2 Distributors (DST_1 and DST_2)
 	+ 2 Retailers (RTL_1, RTL_2)
 	+ 3 Customers (CST_1, CST_2 and CST_3)
+
 where these entities interacts from the end to end: from the fetching of raw material until the selling of the products.
 + prints all the Models
 
