@@ -85,11 +85,7 @@ export class SupplychainchaincodeController extends ConvectorController {
     @Param(Customer)
     customer: Customer
   ) {
-
-    console.log("prima await")
     await customer.save();
-    console.log("dopo await")
-
     const storedCustomers = await Customer.getAll('io.worldsibu.Customer');
     console.log(storedCustomers);
   }
@@ -99,6 +95,18 @@ export class SupplychainchaincodeController extends ConvectorController {
   {
     const storedSuppliers = await Supplier.getAll('io.worldsibu.Supplier');
     console.log(storedSuppliers);
+    return storedSuppliers;
+  }
+
+  @Invokable()
+  public async getSupplierById(
+    @Param(yup.string())
+    supplierId: string
+  )
+  {
+    const supplier = await Supplier.getOne(supplierId);
+    console.log(supplier);
+    return supplier;
   }
 
   @Invokable()
@@ -106,6 +114,18 @@ export class SupplychainchaincodeController extends ConvectorController {
   {
     const storedManufacturers = await Manufacturer.getAll('io.worldsibu.Manufacturer');
     console.log(storedManufacturers);
+    return storedManufacturers;
+  }
+
+  @Invokable()
+  public async getManufacturerById(
+    @Param(yup.string())
+    manufacturerId: string
+  )
+  {
+    const manufacturer = await Manufacturer.getOne(manufacturerId);
+    console.log(manufacturer);
+    return manufacturer;
   }
 
   @Invokable()
@@ -113,6 +133,18 @@ export class SupplychainchaincodeController extends ConvectorController {
   {
     const storedDistributors = await Distributor.getAll('io.worldsibu.Distributor');
     console.log(storedDistributors);
+    return storedDistributors
+  }
+
+  @Invokable()
+  public async getDistributorById(
+    @Param(yup.string())
+    distributorId: string
+  )
+  {
+    const distributor = await Distributor.getOne(distributorId);
+    console.log(distributor);
+    return distributor;
   }
 
   @Invokable()
@@ -120,6 +152,18 @@ export class SupplychainchaincodeController extends ConvectorController {
   {
     const storedRetailers = await Retailer.getAll('io.worldsibu.Retailer');
     console.log(storedRetailers);
+    return storedRetailers;
+  }
+
+  @Invokable()
+  public async getRetailerById(
+    @Param(yup.string())
+    retailerId: string
+  )
+  {
+    const retailer = await Retailer.getOne(retailerId);
+    console.log(retailer);
+    return retailer;
   }
 
   @Invokable()
@@ -127,6 +171,18 @@ export class SupplychainchaincodeController extends ConvectorController {
   {
     const storedCustomers = await Customer.getAll('io.worldsibu.Customer');
     console.log(storedCustomers);
+    return storedCustomers;
+  }
+
+  @Invokable()
+  public async getCustomerById(
+    @Param(yup.string())
+    customerId: string
+  )
+  {
+    const customer = await Customer.getOne(customerId);
+    console.log(customer);
+    return customer;
   }
 
   @Invokable()

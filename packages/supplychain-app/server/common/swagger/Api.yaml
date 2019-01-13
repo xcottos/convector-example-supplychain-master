@@ -1,0 +1,342 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: supplychain-app
+  description: SupplyChain app
+basePath: /api/v1/supplychain
+tags:
+  - name: Suppliers
+    description: Simple supplier endpoints
+  - name: Manufacturers
+    description: Simple manufacturer endpoints
+  - name: Distributors
+    description: Simple distributor endpoints
+  - name: Retailers
+    description: Simple retailer endpoints
+  - name: Customers
+    description: Simple customer endpoints
+  - name: Specification
+    description: The swagger API specification
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+
+definitions:
+
+  SupplierBody:
+    type: object
+    title: supplier
+    required:
+      - id
+      - name
+      - rawMaterialAvailable
+    properties:
+      id:
+        type: string
+        example: SPL_3
+      name:
+        type: string
+        example: Supplier3
+      rawMaterialAvailable:
+        type: number
+        example: 123
+
+  ManufacturerBody:
+    type: object
+    title: manufacturer
+    required:
+      - id
+      - name
+      - productsAvailable
+      - rawMaterialAvailable
+    properties:
+      id:
+        type: string
+        example: MNF_3
+      name:
+        type: string
+        example: Manufacturer3
+      productsAvailable:
+        type: number
+        example: 123
+      rawMaterialAvailable:
+        type: number
+        example: 123
+
+  DistributorBody:
+    type: object
+    title: distributor
+    required:
+      - id
+      - name
+      - productsToBeShipped
+      - productsShipped
+      - productsReceived
+    properties:
+      id:
+        type: string
+        example: DST_3
+      name:
+        type: string
+        example: Distributor3
+      productsToBeShipped:
+        type: number
+        example: 123
+      productsShipped:
+        type: number
+        example: 123
+      productsReceived:
+        type: number
+        example: 123
+
+  RetailerBody:
+    type: object
+    title: retailer
+    required:
+      - id
+      - name
+      - productsBought
+      - productsAvailable
+      - productsSold
+    properties:
+      id:
+        type: string
+        example: RTL_3
+      name:
+        type: string
+        example: Retailer3
+      productsBought:
+        type: number
+        example: 123
+      productsAvailable:
+        type: number
+        example: 123
+      productsSold:
+        type: number
+        example: 123
+
+  CustomerBody:
+    type: object
+    title: customer
+    required:
+      - id
+      - name
+      - productsBought
+    properties:
+      id:
+        type: string
+        example: CUS_4
+      name:
+        type: string
+        example: Customer1
+      productsBought:
+        type: number
+        example: 123
+
+paths:
+  /suppliers:
+    get:
+      tags:
+        - Suppliers
+      description: Fetch all suppliers
+      responses:
+        200:
+          description: Returns all suppliers
+    post:
+      tags:
+        - Suppliers
+      description: Create a new supplier
+      parameters:
+        - name: supplier
+          in: body
+          description: a supplier
+          required: true
+          schema:
+            $ref: "#/definitions/SupplierBody"
+      responses:
+        200:
+          description: Returns all suppliers
+
+  /suppliers/{id}:
+    get:
+      tags:
+        - Suppliers
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the supplier to retrieve
+          type: string
+      responses:
+        200:
+          description: Return the suppplier with the specified id
+        404:
+          description: Supplier not found
+
+  /manufacturers:
+    get:
+      tags:
+        - Manufacturers
+      description: Fetch all manufacturers
+      responses:
+        200:
+          description: Returns all manufacturers
+    post:
+      tags:
+        - Manufacturers
+      description: Create a new manufacturer
+      parameters:
+        - name: manufacturer
+          in: body
+          description: a manufacturer
+          required: true
+          schema:
+            $ref: "#/definitions/ManufacturerBody"
+      responses:
+        200:
+          description: Returns all manufacturers
+
+  /manufacturers/{id}:
+    get:
+      tags:
+        - Manufacturers
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the manufacturer to retrieve
+          type: integer
+      responses:
+        200:
+          description: Return the suppplier with the specified id
+        404:
+          description: Manufacturer not found
+
+  /distributors:
+    get:
+      tags:
+        - Distributors
+      description: Fetch all distributors
+      responses:
+        200:
+          description: Returns all distributors
+    post:
+      tags:
+        - Distributors
+      description: Create a new distributor
+      parameters:
+        - name: distributor
+          in: body
+          description: a distributor
+          required: true
+          schema:
+            $ref: "#/definitions/DistributorBody"
+      responses:
+        200:
+          description: Returns all distributors
+
+  /distributors/{id}:
+    get:
+      tags:
+        - Distributors
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the distributor to retrieve
+          type: string
+      responses:
+        200:
+          description: Return the suppplier with the specified id
+        404:
+          description: Distributor not found
+
+  /retailers:
+    get:
+      tags:
+        - Retailers
+      description: Fetch all retailers
+      responses:
+        200:
+          description: Returns all retailers
+    post:
+      tags:
+        - Retailers
+      description: Create a new retailer
+      parameters:
+        - name: retailer
+          in: body
+          description: a retailer
+          required: true
+          schema:
+            $ref: "#/definitions/RetailerBody"
+      responses:
+        200:
+          description: Returns all retailers
+
+  /retailers/{id}:
+    get:
+      tags:
+        - Retailers
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the retailer to retrieve
+          type: string
+      responses:
+        200:
+          description: Return the suppplier with the specified id
+        404:
+          description: Retailer not found
+
+  /customers:
+    get:
+      tags:
+        - Customers
+      description: Fetch all customers
+      responses:
+        200:
+          description: Returns all customers
+    post:
+      tags:
+        - Customers
+      description: Create a new customer
+      parameters:
+        - name: customer
+          in: body
+          description: a customer
+          required: true
+          schema:
+            $ref: "#/definitions/CustomerBody"
+      responses:
+        200:
+          description: Returns all customers
+
+  /customers/{id}:
+    get:
+      tags:
+        - Customers
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the customer to retrieve
+          type: string
+      responses:
+        200:
+          description: Return the suppplier with the specified id
+        404:
+          description: Customer not found
+
+
+  /spec:
+    get:
+      tags:
+        - Specification
+      responses:
+        200:
+          description: Return the API specification
