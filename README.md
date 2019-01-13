@@ -1394,7 +1394,224 @@ export namespace Models {
 }
 ```
 
-Now we have to edit the **./packages/supplychain-app/server/common/swagger/Api.yaml** in order to have the Swagger API recognising our models:
+In **./packages/myapp/server/api/controllers/examples/controller.ts** we can find the generated controller client that we need now to modify in order to call the methods of our blockchain controller (the one that we defined in the previous chapter)
+
+```JavaScript
+import { Request, Response } from 'express';
+import { SupplyChainController } from '../../../smartContractControllers';
+import { Models } from '../../../smartContractModels';
+
+export class Controller {
+  async getAllSuppliers(req: Request, res: Response): Promise<void> {
+    let cntrl = await SupplyChainController.init();
+    let results = await cntrl.getAllSuppliers();
+
+    res.json(results);
+  }
+
+  async getSupplierById(req: Request, res: Response) {
+    let cntrl = await SupplyChainController.init();
+    let result = await cntrl.getSupplierById(req.params.supplierId);
+
+    if (!result) {
+      return res.status(404);
+    }
+    return res.json(result);
+  }
+
+  async createSupplier(req: Request, res: Response) {
+    try {
+      let cntrl = await SupplyChainController.init();
+      let supplierRaw = req.body;
+      supplierRaw.type = 'io.worldsibu.Supplier';
+      console.log('supplier', supplierRaw);
+      let supplier = new Models.Supplier(supplierRaw);
+      await cntrl.createSupplier(supplier);
+
+      res.send(201);
+    } catch (ex) {
+      console.log(ex.message, ex.stack);
+      res.status(500).send(ex);
+    }
+  }
+
+  async getAllManufacturers(req: Request, res: Response): Promise<void> {
+    let cntrl = await SupplyChainController.init();
+    let results = await cntrl.getAllManufacturers();
+
+    res.json(results);
+  }
+
+  async getManufacturerById(req: Request, res: Response) {
+    let cntrl = await SupplyChainController.init();
+    let result = await cntrl.getManufacturerById(req.params.manufacturerId);
+
+    if (!result) {
+      return res.status(404);
+    }
+    return res.json(result);
+  }
+
+  async createManufacturer(req: Request, res: Response) {
+    try {
+      let cntrl = await SupplyChainController.init();
+      let manufacturerRaw = req.body;
+      manufacturerRaw.type = 'io.worldsibu.Manufacturer';
+      console.log('manufacturer', manufacturerRaw);
+      let manufacturer = new Models.Manufacturer(manufacturerRaw);
+      await cntrl.createManufacturer(manufacturer);
+
+      res.send(201);
+    } catch (ex) {
+      console.log(ex.message, ex.stack);
+      res.status(500).send(ex);
+    }
+  }
+
+  async getAllDistributors(req: Request, res: Response): Promise<void> {
+    let cntrl = await SupplyChainController.init();
+    let results = await cntrl.getAllDistributors();
+
+    res.json(results);
+  }
+
+  async getDistributorById(req: Request, res: Response) {
+    let cntrl = await SupplyChainController.init();
+    let result = await cntrl.getDistributorById(req.params.distributorId);
+
+    if (!result) {
+      return res.status(404);
+    }
+    return res.json(result);
+  }
+
+  async createDistributor(req: Request, res: Response) {
+    try {
+      let cntrl = await SupplyChainController.init();
+      let distributorRaw = req.body;
+      distributorRaw.type = 'io.worldsibu.Distributor';
+      console.log('distributor', distributorRaw);
+      let distributor = new Models.Distributor(distributorRaw);
+      await cntrl.createDistributor(distributor);
+
+      res.send(201);
+    } catch (ex) {
+      console.log(ex.message, ex.stack);
+      res.status(500).send(ex);
+    }
+  }
+
+  async getAllRetailers(req: Request, res: Response): Promise<void> {
+    let cntrl = await SupplyChainController.init();
+    let results = await cntrl.getAllRetailers();
+
+    res.json(results);
+  }
+
+  async getRetailerById(req: Request, res: Response) {
+    let cntrl = await SupplyChainController.init();
+    let result = await cntrl.getRetailerById(req.params.retailerId);
+
+    if (!result) {
+      return res.status(404);
+    }
+    return res.json(result);
+  }
+
+  async createRetailer(req: Request, res: Response) {
+    try {
+      let cntrl = await SupplyChainController.init();
+      let retailerRaw = req.body;
+      retailerRaw.type = 'io.worldsibu.Retailer';
+      console.log('retailer', retailerRaw);
+      let retailer = new Models.Retailer(retailerRaw);
+      await cntrl.createRetailer(retailer);
+
+      res.send(201);
+    } catch (ex) {
+      console.log(ex.message, ex.stack);
+      res.status(500).send(ex);
+    }
+  }
+
+  async getAllCustomers(req: Request, res: Response): Promise<void> {
+    let cntrl = await SupplyChainController.init();
+    let results = await cntrl.getAllCustomers();
+
+    res.json(results);
+  }
+
+  async getCustomerById(req: Request, res: Response) {
+    let cntrl = await SupplyChainController.init();
+    let result = await cntrl.getCustomerById(req.params.customerId);
+
+    if (!result) {
+      return res.status(404);
+    }
+    return res.json(result);
+  }
+
+  async createCustomer(req: Request, res: Response) {
+    try {
+      let cntrl = await SupplyChainController.init();
+      let customerRaw = req.body;
+      customerRaw.type = 'io.worldsibu.Customer';
+      console.log('customer', customerRaw);
+      let customer = new Models.Customer(customerRaw);
+      await cntrl.createCustomer(customer);
+
+      res.send(201);
+    } catch (ex) {
+      console.log(ex.message, ex.stack);
+      res.status(500).send(ex);
+    }
+  }
+
+}
+export default new Controller();
+```
+
+Now in **packages/supplychain-app/server/routes.ts** we need to add the base route for our API that in our case is **/api/v1/supplychain** as we specified in the **packages/supplychain-app/server/common/swagger/Api.yaml** where we defined ``basePath: /api/v1/supplychain``, it is the base for our any future invocation:
+
+```JavaScript
+import { Application } from 'express';
+import supplyChainRouter from './api/controllers/examples/router'
+export default function routes(app: Application): void {
+  app.use('/api/v1/supplychain', supplyChainRouter);
+};
+```
+
+The next step is defining the routes of our API considering as base **/api/v1/supplychain**. This file is **packages/supplychain-app/server/api/controllers/examples/router.ts**
+
+
+```JavaScript
+import express from 'express';
+import controller from './controller'
+export default express.Router()
+    .post('/suppliers/', controller.createSupplier)
+    .get('/suppliers/', controller.getAllSuppliers)
+    .get('/suppliers/:supplierId', controller.getSupplierById)
+    .post('/manufacturers/', controller.createManufacturer)
+    .get('/manufacturers/', controller.getAllManufacturers)
+    .get('/manufacturers/:manufacturerId', controller.getManufacturerById)
+    .post('/distributors/', controller.createDistributor)
+    .get('/distributors/', controller.getAllDistributors)
+    .get('/distributors/:distributorId', controller.getDistributorById)
+    .post('/retailers/', controller.createRetailer)
+    .get('/retailers/', controller.getAllRetailers)
+    .get('/retailers/:retailerId', controller.getRetailerById)
+    .post('/customers/', controller.createCustomer)
+    .get('/customers/', controller.getAllCustomers)
+    .get('/customers/:customerId', controller.getCustomerById)
+
+    ;
+```
+
+How it works is straight forward since in this file we can see that we define the methods starting by the HTTP method accepted (i.e. get, post etc.) followed by the suffix of the call (i.e. /suppliers/) and the correspondent controller method to be invoked (i.e. createSupplier)
+
+That means that if, for example, the server receives this call ``http://localhost:3000/api/v1/supplychain/suppliers/`` invoked with the **GET** method, what will happen in the backend is that the method **getAllSuppliers** of the controller will be invoked.
+
+As last, we have to edit the **./packages/supplychain-app/server/common/swagger/Api.yaml** in order to have the Swagger API recognising our models:
 
 ```javascript
 swagger: "2.0"
@@ -1741,222 +1958,6 @@ paths:
           description: Return the API specification
 ```
 
-In **./packages/myapp/server/api/controllers/examples/controller.ts** we can find the generated controller client that we need now to modify in order to call the methods of our blockchain controller (the one that we defined in the previous chapter)
-
-```JavaScript
-import { Request, Response } from 'express';
-import { SupplyChainController } from '../../../smartContractControllers';
-import { Models } from '../../../smartContractModels';
-
-export class Controller {
-  async getAllSuppliers(req: Request, res: Response): Promise<void> {
-    let cntrl = await SupplyChainController.init();
-    let results = await cntrl.getAllSuppliers();
-
-    res.json(results);
-  }
-
-  async getSupplierById(req: Request, res: Response) {
-    let cntrl = await SupplyChainController.init();
-    let result = await cntrl.getSupplierById(req.params.supplierId);
-
-    if (!result) {
-      return res.status(404);
-    }
-    return res.json(result);
-  }
-
-  async createSupplier(req: Request, res: Response) {
-    try {
-      let cntrl = await SupplyChainController.init();
-      let supplierRaw = req.body;
-      supplierRaw.type = 'io.worldsibu.Supplier';
-      console.log('supplier', supplierRaw);
-      let supplier = new Models.Supplier(supplierRaw);
-      await cntrl.createSupplier(supplier);
-
-      res.send(201);
-    } catch (ex) {
-      console.log(ex.message, ex.stack);
-      res.status(500).send(ex);
-    }
-  }
-
-  async getAllManufacturers(req: Request, res: Response): Promise<void> {
-    let cntrl = await SupplyChainController.init();
-    let results = await cntrl.getAllManufacturers();
-
-    res.json(results);
-  }
-
-  async getManufacturerById(req: Request, res: Response) {
-    let cntrl = await SupplyChainController.init();
-    let result = await cntrl.getManufacturerById(req.params.manufacturerId);
-
-    if (!result) {
-      return res.status(404);
-    }
-    return res.json(result);
-  }
-
-  async createManufacturer(req: Request, res: Response) {
-    try {
-      let cntrl = await SupplyChainController.init();
-      let manufacturerRaw = req.body;
-      manufacturerRaw.type = 'io.worldsibu.Manufacturer';
-      console.log('manufacturer', manufacturerRaw);
-      let manufacturer = new Models.Manufacturer(manufacturerRaw);
-      await cntrl.createManufacturer(manufacturer);
-
-      res.send(201);
-    } catch (ex) {
-      console.log(ex.message, ex.stack);
-      res.status(500).send(ex);
-    }
-  }
-
-  async getAllDistributors(req: Request, res: Response): Promise<void> {
-    let cntrl = await SupplyChainController.init();
-    let results = await cntrl.getAllDistributors();
-
-    res.json(results);
-  }
-
-  async getDistributorById(req: Request, res: Response) {
-    let cntrl = await SupplyChainController.init();
-    let result = await cntrl.getDistributorById(req.params.distributorId);
-
-    if (!result) {
-      return res.status(404);
-    }
-    return res.json(result);
-  }
-
-  async createDistributor(req: Request, res: Response) {
-    try {
-      let cntrl = await SupplyChainController.init();
-      let distributorRaw = req.body;
-      distributorRaw.type = 'io.worldsibu.Distributor';
-      console.log('distributor', distributorRaw);
-      let distributor = new Models.Distributor(distributorRaw);
-      await cntrl.createDistributor(distributor);
-
-      res.send(201);
-    } catch (ex) {
-      console.log(ex.message, ex.stack);
-      res.status(500).send(ex);
-    }
-  }
-
-  async getAllRetailers(req: Request, res: Response): Promise<void> {
-    let cntrl = await SupplyChainController.init();
-    let results = await cntrl.getAllRetailers();
-
-    res.json(results);
-  }
-
-  async getRetailerById(req: Request, res: Response) {
-    let cntrl = await SupplyChainController.init();
-    let result = await cntrl.getRetailerById(req.params.retailerId);
-
-    if (!result) {
-      return res.status(404);
-    }
-    return res.json(result);
-  }
-
-  async createRetailer(req: Request, res: Response) {
-    try {
-      let cntrl = await SupplyChainController.init();
-      let retailerRaw = req.body;
-      retailerRaw.type = 'io.worldsibu.Retailer';
-      console.log('retailer', retailerRaw);
-      let retailer = new Models.Retailer(retailerRaw);
-      await cntrl.createRetailer(retailer);
-
-      res.send(201);
-    } catch (ex) {
-      console.log(ex.message, ex.stack);
-      res.status(500).send(ex);
-    }
-  }
-
-  async getAllCustomers(req: Request, res: Response): Promise<void> {
-    let cntrl = await SupplyChainController.init();
-    let results = await cntrl.getAllCustomers();
-
-    res.json(results);
-  }
-
-  async getCustomerById(req: Request, res: Response) {
-    let cntrl = await SupplyChainController.init();
-    let result = await cntrl.getCustomerById(req.params.customerId);
-
-    if (!result) {
-      return res.status(404);
-    }
-    return res.json(result);
-  }
-
-  async createCustomer(req: Request, res: Response) {
-    try {
-      let cntrl = await SupplyChainController.init();
-      let customerRaw = req.body;
-      customerRaw.type = 'io.worldsibu.Customer';
-      console.log('customer', customerRaw);
-      let customer = new Models.Customer(customerRaw);
-      await cntrl.createCustomer(customer);
-
-      res.send(201);
-    } catch (ex) {
-      console.log(ex.message, ex.stack);
-      res.status(500).send(ex);
-    }
-  }
-
-}
-export default new Controller();
-```
-
-Now in **packages/supplychain-app/server/routes.ts** we need to add the base route for our API that in our case is **/api/v1/supplychain** as we specified in the **packages/supplychain-app/server/common/swagger/Api.yaml** where we defined ``basePath: /api/v1/supplychain``, it is the base for our any future invocation:
-
-```JavaScript
-import { Application } from 'express';
-import supplyChainRouter from './api/controllers/examples/router'
-export default function routes(app: Application): void {
-  app.use('/api/v1/supplychain', supplyChainRouter);
-};
-```
-
-The next step is defining the routes of our API considering as base **/api/v1/supplychain**. This file is **packages/supplychain-app/server/api/controllers/examples/router.ts**
-
-
-```JavaScript
-import express from 'express';
-import controller from './controller'
-export default express.Router()
-    .post('/suppliers/', controller.createSupplier)
-    .get('/suppliers/', controller.getAllSuppliers)
-    .get('/suppliers/:supplierId', controller.getSupplierById)
-    .post('/manufacturers/', controller.createManufacturer)
-    .get('/manufacturers/', controller.getAllManufacturers)
-    .get('/manufacturers/:manufacturerId', controller.getManufacturerById)
-    .post('/distributors/', controller.createDistributor)
-    .get('/distributors/', controller.getAllDistributors)
-    .get('/distributors/:distributorId', controller.getDistributorById)
-    .post('/retailers/', controller.createRetailer)
-    .get('/retailers/', controller.getAllRetailers)
-    .get('/retailers/:retailerId', controller.getRetailerById)
-    .post('/customers/', controller.createCustomer)
-    .get('/customers/', controller.getAllCustomers)
-    .get('/customers/:customerId', controller.getCustomerById)
-
-    ;
-```
-
-How it works is straight forward since in this file we can see that we define the methods starting by the HTTP method accepted (i.e. get, post etc.) followed by the suffix of the call (i.e. /suppliers/) and the correspondent controller method to be invoked (i.e. createSupplier)
-
-That means that if, for example, the server receives this call ``http://localhost:3000/api/v1/supplychain/suppliers/`` invoked with the **GET** method, what will happen in the backend is that the method **getAllSuppliers** of the controller will be invoked.
 
 Now we need to recompile everything:
 
