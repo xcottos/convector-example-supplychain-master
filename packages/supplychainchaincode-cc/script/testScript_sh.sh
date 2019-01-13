@@ -1,6 +1,10 @@
 #!/bin/sh
 #init
 cd ../../../
+lerna clean
+rm -rf node_modules
+rm package-lock.json
+npm i
 npm run env:restart
 npm run cc:start -- supplychainchaincode  1
 npm run cc:invoke -- supplychainchaincode org1 user1 supplychainchaincode createSupplier '{"id":"SPL_1","name":"supplier1","rawMaterialAvailable":2000}'
@@ -36,4 +40,9 @@ npm run cc:invoke -- supplychainchaincode org1 user1 supplychainchaincode buyPro
 npm run cc:invoke -- supplychainchaincode org1 user1 supplychainchaincode buyProductsFromRetailer RTL_1 CST_2 2
 
 npm run cc:invoke -- supplychainchaincode org1 user1 supplychainchaincode getAllModels
+
+cd packages/supplychain-app
+npx lerna run compile --scope supplychain-app
+npx lerna run dev --scope supplychain-app --stream
+
 #docker logs $(docker ps -qa | head -n 1) -f
