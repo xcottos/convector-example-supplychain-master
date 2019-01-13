@@ -1029,7 +1029,7 @@ In the next section I will describe how to implement a Node JS that will allow u
 First of all we need to install the yeoman (https://yeoman.io) generator that we'll use for creating the skeleton of our backend:
 
 ```
-npm install -g generator-express-no-stress-typescript2)
+npm install -g generator-express-no-stress-typescript2
 ```
 No cd into the packages directory and generate the skeleton of the app:
 
