@@ -1429,14 +1429,14 @@ definitions:
     type: object
     title: supplier
     required:
-			- id
+      - id
       - name
       - rawMaterialAvailable
     properties:
-			id:
-				type: string
-				example: SPL_3
-			name:
+      id:
+        type: string
+        example: SPL_3
+      name:
         type: string
         example: Supplier3
       rawMaterialAvailable:
@@ -1447,14 +1447,14 @@ definitions:
     type: object
     title: manufacturer
     required:
-			- id
+      - id
       - name
       - productsAvailable
       - rawMaterialAvailable
     properties:
-			id:
-				type: string
-				example: MNF_3
+      id:
+        type: string
+        example: MNF_3
       name:
         type: string
         example: Manufacturer3
@@ -1469,15 +1469,15 @@ definitions:
     type: object
     title: distributor
     required:
-			- id
+      - id
       - name
       - productsToBeShipped
       - productsShipped
       - productsReceived
     properties:
-			id:
-				type: string
-				example: DST_3
+      id:
+        type: string
+        example: DST_3
       name:
         type: string
         example: Distributor3
@@ -1495,15 +1495,15 @@ definitions:
     type: object
     title: retailer
     required:
-			- id
+      - id
       - name
       - productsBought
       - productsAvailable
       - productsSold
     properties:
-			id:
-				type: string
-				example: RTL_3
+      id:
+        type: string
+        example: RTL_3
       name:
         type: string
         example: Retailer3
@@ -1521,13 +1521,13 @@ definitions:
     type: object
     title: customer
     required:
-			- id
+      - id
       - name
       - productsBought
     properties:
-			id:
-				type: string
-				example: CUS_4
+      id:
+        type: string
+        example: CUS_4
       name:
         type: string
         example: Customer1
