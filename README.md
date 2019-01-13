@@ -1374,7 +1374,7 @@ We need now to cd into the directory **packages/supplychainchaincode-cc** and re
 lerna run client:generate
 ```
 
-We need now to create a file called **packages/supplychain-app/server/smartContractModels.ts** that will configure the base storage for the models and will export their names for further use in the controller client that will be described shortly:
+We need now to create a file called **packages/supplychain-app/server/smartContractModels.ts** that will export the names of the Models using the ones defined in the client directory. This class will be used in the controller client that will be described shortly:
 
 ```javascript
 import { BaseStorage } from '@worldsibu/convector-core-storage';
