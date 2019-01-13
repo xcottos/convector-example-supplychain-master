@@ -1571,7 +1571,7 @@ export class Controller {
 export default new Controller();
 ```
 
-Now in **packages/supplychain-app/server/routes.ts** we need to add the base route for our API that in our case is **/api/v1/supplychain** as we specified in the **packages/supplychain-app/server/common/swagger/Api.yaml** where we defined ``basePath: /api/v1/supplychain``, it is the base for our any future invocation:
+Now in **packages/supplychain-app/server/routes.ts** we need to add the base route for our API that in our case is **/api/v1/supplychain** as we will specify later in the **packages/supplychain-app/server/common/swagger/Api.yaml** where we will define ``basePath: /api/v1/supplychain``, that will be the base for our any future invocation:
 
 ```JavaScript
 import { Application } from 'express';
