@@ -853,41 +853,31 @@ npm run cc:start -- supplychainchaincode  1
 The execution of this command should end with an output like the following:
 
 ```
-> supplychain@0.1.0 cc:start /Users/luca/Projects/GitHubProjects/supplychain
-> f() { npm-run-all -s "cc:package -- $1 org1" "cc:install -- $1 $2 org1" "cc:install -- $1 $2 org2" "cc:instantiate -- $1 $2 org1"; }; f "supplychainchaincode" "1"
+> supplychain@0.1.0 cc:start /Users/luca/Projects/GitHubProjects/cloned/convector-example-supplychain-master
+> f() { npm run cc:package -- $1 org1; npm run cc:install $1; }; f "supplychainchaincode" "1"
 ............
 <some other messages>
 ............
-Installing now...
-info: [packager/Node.js]: packaging Node Chaincode from /Users/luca/Projects/GitHubProjects/supplychain/chaincode
-Installed successfully
+> supplychain@0.1.0 cc:install /Users/luca/Projects/GitHubProjects/cloned/convector-example-supplychain-master
+> f() { ./node_modules/.bin/hurl install $1 node -P ./chaincode-$1 -p $PWD/fabric-hurl; }; f "supplychainchaincode"
 
-> supplychain@0.1.0 cc:instantiate /Users/luca/Projects/GitHubProjects/supplychain
-> f() { chaincode-manager --config ./$3.$1.config.json instantiate $1 $2; }; f "supplychainchaincode" "1" "org1"
-
-Instantiating now...
-error: [Transform] Error parsing buffer to JSON
-supplychainchaincode1escc vscc*(
-
-
-
-Org1MSP
-
-Org2MSP2D
- �I�;>�v�XX�B�t\Lj�>�d�x �7�%�{)�v$iN�_2��!�U���l�
-v���: ��_�.��l���M�w
-                    �9�aq��i~rg��<B,
-
-
-
-Org1MSP
-
-Org2MSP
-Instantiated successfully
-Initializing controllers now...
-Initialization successfully
+[hurley] - installing smart contract located at /Users/luca/Projects/GitHubProjects/cloned/convector-example-supplychain-master/chaincode-supplychainchaincode
+Installing Chaincode at org1
+2019-01-14 10:24:30.304 CET [chaincodeCmd] checkChaincodeCmdParams -> INFO 001 Using default escc
+2019-01-14 10:24:30.304 CET [chaincodeCmd] checkChaincodeCmdParams -> INFO 002 Using default vscc
+2019-01-14 10:24:30.392 CET [chaincodeCmd] install -> INFO 003 Installed remotely response:<status:200 payload:"OK" >
+Installed Chaincode at org1
+Installing Chaincode at org2
+2019-01-14 10:24:30.463 CET [chaincodeCmd] checkChaincodeCmdParams -> INFO 001 Using default escc
+2019-01-14 10:24:30.463 CET [chaincodeCmd] checkChaincodeCmdParams -> INFO 002 Using default vscc
+2019-01-14 10:24:30.541 CET [chaincodeCmd] install -> INFO 003 Installed remotely response:<status:200 payload:"OK" >
+Installed Chaincode at org2
+Instantiating Chaincode at org1
+It may take a few minutes depending on the chaincode dependencies
+2019-01-14 10:24:40.613 CET [chaincodeCmd] checkChaincodeCmdParams -> INFO 001 Using default escc
+2019-01-14 10:24:40.613 CET [chaincodeCmd] checkChaincodeCmdParams -> INFO 002 Using default vscc
+Instantiated Chaincode at org1
 ```
-Don't worry about the error message, it's more a warning that should disappear in the next versions of the framework.
 
 Running now the command ``docker ps -a`` you should notice that there are 2 new containers:
 ```
