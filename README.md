@@ -838,19 +838,27 @@ Once the Models and Controller have been written, you have to go back to the roo
 If there are no errors you should see the output that tells you the chaincode called **supplychainchaincode-cc@0.1.0** has been processed (generating the client, the controller interface etc.)
 
 Now it's time to install and start the chaincode with the command ``npm run cc:start`` that is defined in the package.json as:
+```JavaScript
+"cc:start": "f() { npm run cc:package -- $1 org1; npm run cc:install $1; }; f",,
 ```
-"cc:start": "f() { npm-run-all -s \"cc:package -- $1 org1\" \"cc:install -- $1 $2 org1\" \"cc:install -- $1 $2 org2\" \"cc:instantiate -- $1 $2 org1\"; }; f",
-```
-So it executes with the command ``npm-run-all`` a sequence of commands that are defined in the package.json (``cc:package``, ``cc:install``, ``cc:instantiate``) passing to them the 2 parameters that are provided:
+So it executes 2 commands passing the **chaincode name** as parameter:
 
-+ chaincode name
-+ chaincode version
++ cc:package -- $1 org1 (It creates the package to be installed through the command below)
+```javascript
+npm run lerna:build; chaincode-manager --config ./$2.$1.config.json --output ./chaincode-$1 package;
+```
++ npm run cc:install $1 (it installs the chaincode using hurl through the command below)
+```javascript
+./node_modules/.bin/hurl install $1 node -P ./chaincode-$1 -p $PWD/fabric-hurl
+```
+
+The execution of this command:
 
 ```
 npm run cc:start -- supplychainchaincode  1
 ```
 
-The execution of this command should end with an output like the following:
+should end with an output like the following:
 
 ```
 > supplychain@0.1.0 cc:start /Users/luca/Projects/GitHubProjects/cloned/convector-example-supplychain-master
