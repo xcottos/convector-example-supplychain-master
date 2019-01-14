@@ -841,7 +841,7 @@ Now it's time to install and start the chaincode with the command ``npm run cc:s
 ```JavaScript
 "cc:start": "f() { npm run cc:package -- $1 org1; npm run cc:install $1; }; f",,
 ```
-So it executes 2 commands passing the **chaincode name** as parameter:
+So it executes 2 commands passing the **chaincode name** as first parameter (the $1), and the name **org1** as second parameter ($2):
 
 + cc:package -- $1 org1 (It creates the package to be installed through the command below)
 ```javascript
