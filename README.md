@@ -154,7 +154,7 @@ Register user2 for org2
 Register user3 for org1
 Register user3 for org2
 ```
-What happened during the execution of the dommand is that the **Hyperledger Fabric 1.1.0** infrastructure has been started
+What happened during the execution of the dommand is that the **Hyperledger Fabric 1.3.0** infrastructure has been started
 
 running the ``docker ps -a`` command:
 
