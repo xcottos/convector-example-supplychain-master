@@ -2,8 +2,8 @@
   "user": "admin",
   "txTimeout": 300000,
   "channel": "ch1",
-  "keyStore": "./.convector-dev-env/.hfc-org2",
-  "networkProfile": "./.convector-dev-env/examples/org2.network-profile.yaml",
+  "keyStore": "./fabric-hurl/.hfc-org2",
+  "networkProfile": "./fabric-hurl/network-profiles/org2.network-profile.yaml",
   "controllers": [
     {
       "name": "supplychainchaincode-cc",

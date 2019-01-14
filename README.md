@@ -55,6 +55,12 @@ First, the convector-cli package must be installed globally:
 npm i -g @worldsibu/convector-cli
 ``
 
+Second, hurley package must be installed globally, it will provide an easy way to setup an Hyperledger Fabric 1.3 network:
+
+``
+npm i -g @worldsibu/hurley
+``
+
 Then we can start creating the project skeleton using the `conv` command that is invoked with 3 parameters:
 + **new** - for generating a new project
 + **supplychain** - is the name of the project and of the root folder  that will be created
@@ -89,27 +95,27 @@ so at the end your file should look like
   ],
   "scripts": {
     "install": "npm-run-all -s lerna:install",
-    "env:restart": "./node_modules/@worldsibu/convector-tool-dev-env/scripts/restart.sh",
-    "env:clean": "./node_modules/@worldsibu/convector-tool-dev-env/scripts/clean.sh",
-    "cc:start": "f() { npm-run-all -s \"cc:package -- $1 org1\" \"cc:install -- $1 $2 org1\" \"cc:install -- $1 $2 org2\" \"cc:instantiate -- $1 $2 org1\"; }; f",
-    "cc:upgrade": "f() { npm-run-all -s \"cc:package -- $1 org1\" \"cc:install -- $1 $2 org1\" \"cc:install -- $1 $2 org2\" \"cc:upgradePerOrg -- $1 $2\"; }; f",
+    "env:restart": "./node_modules/.bin/hurl new -p $PWD/fabric-hurl",
+    "env:clean": "./node_modules/.bin/hurl clean -p $PWD/fabric-hurl",
+    "cc:start": "f() { npm run cc:package -- $1 org1; npm run cc:install $1; }; f",
+    "cc:upgrade": "f() { npm run cc:package -- $1 org1; ./node_modules/.bin/hurl upgrade $1 node $2  -P ./chaincode-$1 -p $PWD/fabric-hurl; }; f",
     "===================INTERNALS===================": "===================NO NEED TO CALL THEM DIRECTLY===================",
     "lerna:install": "lerna bootstrap",
     "lerna:build": "lerna run build",
-    "cc:package": "f() { npm run lerna:build; chaincode-manager --config ./$2.$1.config.json --output ./chaincode package; }; f",
-    "cc:install": "f() { chaincode-manager --config ./$3.$1.config.json install ./chaincode $1 $2; }; f",
+    "cc:package": "f() { npm run lerna:build; chaincode-manager --config ./$2.$1.config.json --output ./chaincode-$1 package; }; f",
+    "cc:install": "f() { ./node_modules/.bin/hurl install $1 node -P ./chaincode-$1 -p $PWD/fabric-hurl; }; f",
     "cc:instantiate": "f() { chaincode-manager --config ./$3.$1.config.json instantiate $1 $2; }; f",
     "cc:upgradePerOrg": "f() { chaincode-manager --config ./org1.$1.config.json upgrade $1 $2; }; f",
     "cc:invoke": "f() { chaincode-manager --config ./$2.$1.config.json --user $3 invoke $1 ${@:4}; }; f"
-},
+  },
   "devDependencies": {
     "lerna": "^3.4.3",
     "@worldsibu/convector-adapter-mock": "^1.2.0",
     "@worldsibu/convector-tool-chaincode-manager": "^1.2.0",
-    "@worldsibu/convector-tool-dev-env": "^1.2.0",
     "fabric-ca-client": "~1.1.2",
     "fabric-client": "~1.1.2",
-    "npm-run-all": "^4.1.5"
+    "npm-run-all": "^4.1.5",
+    "@worldsibu/hurley": "^0.4.22"
   }
 }
 ```
@@ -128,7 +134,7 @@ found 30 vulnerabilities (10 low, 10 moderate, 10 high)
 
 However this is something I will go in deep in the future.
 
-Within all the packages an **Hyperledger Fabric 1.1.0** version is installed (the package is called **@worldsibu/convector-tool-dev-env**) but since the **fabric-client** and **fabric-ca-client** are peer dependencies the code can be ran on existing instances without problems. (I will update this project with that part in the future)
+The chaincode will be deployed on a Hyperledger Fabric 1.3 network defined and ran by **hurley** whose specific folder is called **fabric-hurl** and is located in the home directory of this project; the **hurl** command is executed by the scripts defined in the **package.json** file. Anyway since the **fabric-client** and **fabric-ca-client** are peer dependencies the code can be ran on existing instances without problems. (I will update this project with that part in the future)
 
 Then to check if the skeleton is working:
 
@@ -153,14 +159,14 @@ What happened during the execution of the dommand is that the **Hyperledger Fabr
 running the ``docker ps -a`` command:
 
 ```
-CONTAINER ID        IMAGE                                     COMMAND                  CREATED             STATUS              PORTS                                                                    NAMES
-6fb1bf3be0be        hyperledger/fabric-peer:x86_64-1.1.0      "peer node start --p…"   About an hour ago   Up About an hour    0.0.0.0:8051->7051/tcp, 0.0.0.0:8052->7052/tcp, 0.0.0.0:8053->7053/tcp   peer0.org2.example.com
-1cec8007989d        hyperledger/fabric-peer:x86_64-1.1.0      "peer node start --p…"   About an hour ago   Up About an hour    0.0.0.0:7051-7053->7051-7053/tcp                                         peer0.org1.example.com
-e548786152b2        hyperledger/fabric-orderer:x86_64-1.1.0   "orderer"                About an hour ago   Up About an hour    0.0.0.0:7050->7050/tcp                                                   orderer.example.com
-b66dba4d74df        hyperledger/fabric-ca:x86_64-1.1.0        "fabric-ca-server st…"   About an hour ago   Up About an hour    0.0.0.0:8054->7054/tcp                                                   ca.org2.example.com
-ddc429937047        hyperledger/fabric-couchdb:x86_64-0.4.6   "tini -- /docker-ent…"   About an hour ago   Up About an hour    4369/tcp, 9100/tcp, 0.0.0.0:6984->5984/tcp                               couchdb.peer0.org2.example.com
-4383da4df1d1        hyperledger/fabric-ca:x86_64-1.1.0        "fabric-ca-server st…"   About an hour ago   Up About an hour    0.0.0.0:7054->7054/tcp                                                   ca.org1.example.com
-21f15839a160        hyperledger/fabric-couchdb:x86_64-0.4.6   "tini -- /docker-ent…"   About an hour ago   Up About an hour    4369/tcp, 9100/tcp, 0.0.0.0:5984->5984/tcp                               couchdb.peer0.org1.example.com
+CONTAINER ID        IMAGE                                                                                                                 COMMAND                  CREATED             STATUS              PORTS                                                                    NAMES
+522fccfd3645        hyperledger/fabric-peer:1.3.0                                                                                         "peer node start --p…"   9 minutes ago       Up 9 minutes        0.0.0.0:7151->7051/tcp, 0.0.0.0:7152->7052/tcp, 0.0.0.0:7153->7053/tcp   peer0.org2.hurley.lab
+a4e4a836e2c9        hyperledger/fabric-peer:1.3.0                                                                                         "peer node start --p…"   9 minutes ago       Up 9 minutes        0.0.0.0:7051-7053->7051-7053/tcp                                         peer0.org1.hurley.lab
+1e9edbbca8a7        hyperledger/fabric-couchdb:0.4.13                                                                                     "tini -- /docker-ent…"   9 minutes ago       Up 9 minutes        4369/tcp, 9100/tcp, 0.0.0.0:5084->5984/tcp                               couchdb.peer0.org1.hurley.lab
+632f5401d402        hyperledger/fabric-orderer:1.3.0                                                                                      "orderer"                9 minutes ago       Up 9 minutes        0.0.0.0:7050->7050/tcp                                                   orderer.hurley.lab
+49929952cdeb        hyperledger/fabric-ca:1.3.0                                                                                           "fabric-ca-server st…"   9 minutes ago       Up 9 minutes        0.0.0.0:7054->7054/tcp                                                   ca.org1.hurley.lab
+cd7433cfb3a7        hyperledger/fabric-couchdb:0.4.13                                                                                     "tini -- /docker-ent…"   9 minutes ago       Up 9 minutes        4369/tcp, 9100/tcp, 0.0.0.0:5184->5984/tcp                               couchdb.peer0.org2.hurley.lab
+a9267ade4e8c        hyperledger/fabric-ca:1.3.0                                                                                           "fabric-ca-server st…"   9 minutes ago       Up 9 minutes        0.0.0.0:7154->7054/tcp                                                   ca.org2.hurley.lab		
 ```
 
 We can see there is:
@@ -168,7 +174,7 @@ We can see there is:
 + 1 Orderer (orderer.example.com)
 + 2 Certificate Authorities (ca.org1.example.com, ca.org2.example.com)
 + 2 Peers (peer0.org1.example.com, peer0.org2.example.com)
-+ 2 CouchDB instances (couchdb.peer0.org1.example.com, couchdb.peer0.org2.example.com)
++ 2 CouchDB instances (couchdb.peer0.org1.hurley.lab, couchdb.peer0.org2.hurley.lab)
 
 Now, the last lines printed as output of the command are the registration of some users in the organizations (**org1** and **org2**) via the certificate authorities that we'll use for interacting with the system; if there are no errors on screen it should be all ok.
 
@@ -537,7 +543,7 @@ The method is really straight forward because:
 + uses the **save()** instance method for saving in the ledger the instance of the Supplier
 + uses the static **getAll()** method for retrieving all the Supplier instances stored in the ledger
 
-All these methods follow the **async/await** pattern to be syncronous.
+All these methods follow the **async/await** pattern to be synchronous.
 
 Another example to be explained is a function that impacts on Models that have been already stored in the ledger, like the **getRawMaterialFromSupplier** that is used to transfer raw material from the Supplier to the Manufacturer:
 
@@ -885,10 +891,10 @@ Don't worry about the error message, it's more a warning that should disappear i
 
 Running now the command ``docker ps -a`` you should notice that there are 2 new containers:
 ```
-bdf95fa3e0dc        dev-peer0.org2.example.com-supplychainchaincode-1-9aa5c4942285be49bae206964203b799cb1007bf5c72147bbe5f41f26272e663   "/bin/sh -c 'cd /usr…"   34 minutes ago      Up 34 minutes                                                                                dev-peer0.org2.example.com-supplychainchaincode-1
-3894275b6094        dev-peer0.org1.example.com-supplychainchaincode-1-db109f7b3ff195ea8176d3ff1056d2abe63088114e7915bf9ee9ae438aef34c0   "/bin/sh -c 'cd /usr…"   34 minutes ago      Up 34 minutes                                                                                dev-peer0.org1.example.com-supplychainchaincode-1
+efe1ea45761c        dev-peer0.org2.hurley.lab-supplychainchaincode-1.0-982db5386d51b5f5bf00ddc0470aff5e11fa77d9a5409fd6991eb7791002a5c3   "/bin/sh -c 'cd /usr…"   7 minutes ago       Up 7 minutes                                                                                 dev-peer0.org2.hurley.lab-supplychainchaincode-1.0
+d7daa9256500        dev-peer0.org1.hurley.lab-supplychainchaincode-1.0-5aea7809261e79ace2a874a1d67b3a998cccc93ce6142f80105dfa2abaa958f5   "/bin/sh -c 'cd /usr…"   8 minutes ago       Up 8 minutes                                                                        dev-peer0.org1.example.com-supplychainchaincode-1.0
 ```
-That are the 2 containers, one per organization, called ``dev-peer0.org1.example.com-supplychainchaincode-1`` and ``dev-peer0.org2.example.com-supplychainchaincode-1``  that are running the chaincode.
+That are the 2 containers, one per organization, called ``dev-peer0.org2.hurley.lab-supplychainchaincode-1.0`` and ``dev-peer0.org1.example.com-supplychainchaincode-1.0``  that are running the chaincode.
 
 ## Interaction with the chaincode
 For interacting with the chaincode we'll use the command ``npm run cc:invoke`` that is defined in the package.json as:
@@ -1112,10 +1118,10 @@ SESSION_SECRET=mySecret
 #Swagger
 SWAGGER_API_SPEC=/spec
 
-KEYSTORE=../../../.convector-dev-env/.hfc-org1
+KEYSTORE=../../../fabric-hurl/.hfc-org1
 USERCERT=admin
 ORGCERT=org1
-NETWORKPROFILE=./config/org1.network-profile.yaml
+NETWORKPROFILE=../../../fabric-hurl/network-profiles/org1.network-profile.yaml
 CHANNEL=ch1
 CHAINCODE=supplychainchaincode
 COUCHDBVIEW=ch1_supplychainchaincode
@@ -1124,128 +1130,12 @@ COUCHDB_HOST=localhost
 COUCHDB_PROTOCOL=http
 ```
 
-The file **./config/org1.network-profile.yaml** has to be created: So we need to create a folder named **config** and indide that folder a file called **org1.network-profile.yaml** that contains all the needed info for configuring the fabric network (defining the number of channels, of peers, of CA etc etc).
-
-```JavaScript
-name: "Org1"
-version: "1.0"
-
-client:
-  organization: Org1MSP
-  credentialStore:
-    path: ../../.convector-dev-env/.hfc-org1
-    cryptoStore:
-      path: ../../.convector-dev-env/.hfc-org1
-
-channels:
-  ch1:
-    orderers:
-      - orderer.example.com
-    peers:
-      peer0.org1.example.com:
-        endorsingPeer: true
-        chaincodeQuery: true
-        ledgerQuery: true
-        eventSource: true
-
-      peer0.org2.example.com:
-        endorsingPeer: true
-        chaincodeQuery: false
-        ledgerQuery: false
-        eventSource: false
-
-  ch2:
-    orderers:
-      - orderer.example.com
-    peers:
-      peer0.org1.example.com:
-        endorsingPeer: true
-        chaincodeQuery: true
-        ledgerQuery: true
-        eventSource: true
-
-      peer0.org2.example.com:
-        endorsingPeer: true
-        chaincodeQuery: false
-        ledgerQuery: false
-        eventSource: false
-
-organizations:
-  Org1MSP:
-    mspid: Org1MSP
-    peers:
-      - peer0.org1.example.com
-    certificateAuthorities:
-      - ca.org1.example.com
-    adminPrivateKey:
-      path: ../../.convector-dev-env/network-objects/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/69c76b7cf25d590da9e1cc74f5c9de2414108226a79e2a81d31a8090435e613f_sk
-    signedCert:
-      path: ../../.convector-dev-env/network-objects/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/Admin@org1.example.com-cert.pem
-
-  Org2MSP:
-    mspid: Org2MSP
-    peers:
-      - peer0.org2.example.com
-    certificateAuthorities:
-      - ca.org2.example.com
-
-orderers:
-  orderer.example.com:
-    url: grpc://localhost:7050
-    grpcOptions:
-      ssl-target-name-override: orderer.example.com
-    tlsCACerts:
-      path: ../../.convector-dev-env/network-objects/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
-
-peers:
-  peer0.org1.example.com:
-    url: grpc://localhost:7051
-    eventUrl: grpc://localhost:7052
-    grpcOptions:
-      ssl-target-name-override: peer0.org1.example.com
-      grpc.keepalive_time_ms: 600000
-    tlsCACerts:
-      path: ../../.convector-dev-env/network-objects/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
-
-  peer0.org2.example.com:
-    url: grpc://localhost:8051
-    eventUrl: grpc://localhost:8052
-    grpcOptions:
-      ssl-target-name-override: peer0.org2.example.com
-      grpc.keepalive_time_ms: 600000
-    tlsCACerts:
-      path: ../../.convector-dev-env/network-objects/crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/msp/tlscacerts/tlsca.org2.example.com-cert.pem
-
-certificateAuthorities:
-  ca.org1.example.com:
-    url: http://localhost:7054
-    httpOptions:
-      verify: false
-    tlsCACerts:
-      path: ../../.convector-dev-env//network-objects/crypto-config/peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem
-    registrar:
-      - enrollId: admin
-        enrollSecret: adminpw
-    caName: ca.org1.example.com
-
-  ca.org2.example.com:
-    url: http://localhost:8054
-    httpOptions:
-      verify: false
-    tlsCACerts:
-      path: ../../.convector-dev-env//network-objects/crypto-config/peerOrganizations/org2.example.com/ca/ca.org2.example.com-cert.pem
-    registrar:
-      - enrollId: admin
-        enrollSecret: adminpw
-    caName: ca.org2.example.com
-```
-
 Now we need to create a file called **packages/supplychain-app/server/selfgenfabriccontext.ts** that contains the environment variables and helper that will be used to interact with the fabric-client and the function **getClient()** that instantiates the **Client** object from the **fabric-client** library and configures it reading the files which names are specified using a variable present in the **.env** file we created above.
 
 We read 3 variables:
 
 ```JavaScript
-KEYSTORE=../../../.convector-dev-env/.hfc-org1
+KEYSTORE=../../../fabric-hurl/.hfc-org1
 USERCERT=admin
 ORGCERT=org1
 ```

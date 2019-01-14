@@ -1,0 +1,191 @@
+version: '2'
+
+networks:
+  hurley_dev_net:
+
+services:
+    # Orderer
+    orderer.hurley.lab:
+        container_name: orderer.hurley.lab
+        image: hyperledger/fabric-orderer:1.3.0
+        environment:
+            - ORDERER_GENERAL_LOGLEVEL=debug
+            - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+            - ORDERER_GENERAL_GENESISMETHOD=file
+            - ORDERER_GENERAL_GENESISFILE=/etc/hyperledger/configtx/genesis.block
+            - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+            - ORDERER_GENERAL_LOCALMSPDIR=/etc/hyperledger/msp/orderer/msp
+        working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
+        command: orderer
+        ports:
+            - 7050:7050
+        volumes:
+            - /Users/luca/Projects/GitHubProjects/cloned/convector-example-supplychain-master/fabric-hurl/artifacts/config/:/etc/hyperledger/configtx
+            - /Users/luca/Projects/GitHubProjects/cloned/convector-example-supplychain-master/fabric-hurl/artifacts/crypto-config/ordererOrganizations/hurley.lab/orderers/orderer.hurley.lab/:/etc/hyperledger/msp/orderer
+
+            - /Users/luca/Projects/GitHubProjects/cloned/convector-example-supplychain-master/fabric-hurl/artifacts/crypto-config/peerOrganizations/org1.hurley.lab/peers/peer0.org1.hurley.lab/:/etc/hyperledger/msp/peerorg1
+            - /Users/luca/Projects/GitHubProjects/cloned/convector-example-supplychain-master/fabric-hurl/artifacts/crypto-config/peerOrganizations/org2.hurley.lab/peers/peer0.org2.hurley.lab/:/etc/hyperledger/msp/peerorg2
+        networks:
+            - hurley_dev_net
+
+
+    # org1
+    ca.org1.hurley.lab:
+        image: hyperledger/fabric-ca:1.3.0
+        environment:
+            - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+            - FABRIC_CA_SERVER_CA_NAME=ca.org1.hurley.lab
+            - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.hurley.lab-cert.pem
+            - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/6e9e5f2a56b5a64145e41b9c02f3ca5da09f7e8c0439445fbdd6913f9beeaa58_sk
+        ports:
+            - "7054:7054"
+        command: fabric-ca-server start -b admin:adminpw -d
+        volumes:
+            - /Users/luca/Projects/GitHubProjects/cloned/convector-example-supplychain-master/fabric-hurl/artifacts/crypto-config/peerOrganizations/org1.hurley.lab/ca/:/etc/hyperledger/fabric-ca-server-config
+        container_name: ca.org1.hurley.lab
+        networks:
+            - hurley_dev_net
+
+    # Peer
+    peer0.org1.hurley.lab:
+        container_name: peer0.org1.hurley.lab
+        image: hyperledger/fabric-peer:1.3.0
+        environment:
+            - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+            - CORE_PEER_ID=peer0.org1.hurley.lab
+            - CORE_PEER_ADDRESS=peer0.org1.hurley.lab:7051
+            - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org1.hurley.lab:7051
+            - CORE_PEER_LISTENADDRESS=peer0.org1.hurley.lab:7051
+            - CORE_PEER_GOSSIP_ENDPOINT=peer0.org1.hurley.lab:7051
+            - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org1.hurley.lab:7051
+            - CORE_PEER_CHAINCODELISTENADDRESS=peer0.org1.hurley.lab:7052
+            - CORE_VM_DOCKER_ATTACHSTDOUT=true
+            - CORE_CHAINCODE_EXECUTETIMEOUT=60
+            - CORE_LOGGING_PEER=debug
+            - CORE_LOGGING_LEVELdebug
+            - CORE_LOGGING_GRPC=DEBUG
+            - CORE_CHAINCODE_LOGGING_LEVEL=DEBUG
+            - CORE_PEER_LOCALMSPID=org1MSP
+            - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.hurley.lab/msp
+            - CORE_PEER_GOSSIP_SKIPHANDSHAKE=true
+            - CORE_PEER_GOSSIP_ORGLEADER=false
+            - CORE_PEER_GOSSIP_USELEADERELECTION=true
+            - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+            - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer0.org1.hurley.lab:5984
+            - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
+            - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
+            - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=net_hurley_dev_net
+        working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+        command: peer node start --peer-chaincodedev=false
+        ports:
+            - 7051:7051
+            - 7052:7052
+            - 7053:7053
+        volumes:
+            - /var/run/:/host/var/run/
+            - /Users/luca/Projects/GitHubProjects/cloned/convector-example-supplychain-master/fabric-hurl/artifacts/crypto-config/peerOrganizations/org1.hurley.lab/peers/peer0.org1.hurley.lab/msp:/etc/hyperledger/msp/peer
+            - /Users/luca/Projects/GitHubProjects/cloned/convector-example-supplychain-master/fabric-hurl/artifacts/crypto-config/peerOrganizations/org1.hurley.lab/users:/etc/hyperledger/msp/users
+            - /Users/luca/Projects/GitHubProjects/cloned/convector-example-supplychain-master/fabric-hurl/artifacts/config:/etc/hyperledger/configtx
+            - shared:/shared
+        depends_on:
+            - orderer.hurley.lab
+            - couchdb.peer0.org1.hurley.lab
+        networks:
+            - hurley_dev_net
+
+    # Couch
+    couchdb.peer0.org1.hurley.lab:
+        container_name: couchdb.peer0.org1.hurley.lab
+        image: hyperledger/fabric-couchdb:0.4.13
+        environment:
+            - COUCHDB_USER=
+            - COUCHDB_PASSWORD=
+        ports:
+            - 5084:5984
+        networks:
+            - hurley_dev_net
+
+
+    # org2
+    ca.org2.hurley.lab:
+        image: hyperledger/fabric-ca:1.3.0
+        environment:
+            - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+            - FABRIC_CA_SERVER_CA_NAME=ca.org2.hurley.lab
+            - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org2.hurley.lab-cert.pem
+            - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/44e9d67f4e1f090c0374a9344a2125a8585cf2a6ec2dc78878bdba26b8d7ff9f_sk
+        ports:
+            - "7154:7054"
+        command: fabric-ca-server start -b admin:adminpw -d
+        volumes:
+            - /Users/luca/Projects/GitHubProjects/cloned/convector-example-supplychain-master/fabric-hurl/artifacts/crypto-config/peerOrganizations/org2.hurley.lab/ca/:/etc/hyperledger/fabric-ca-server-config
+        container_name: ca.org2.hurley.lab
+        networks:
+            - hurley_dev_net
+
+    # Peer
+    peer0.org2.hurley.lab:
+        container_name: peer0.org2.hurley.lab
+        image: hyperledger/fabric-peer:1.3.0
+        environment:
+            - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+            - CORE_PEER_ID=peer0.org2.hurley.lab
+            - CORE_PEER_ADDRESS=peer0.org2.hurley.lab:7051
+            - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org2.hurley.lab:7051
+            - CORE_PEER_LISTENADDRESS=peer0.org2.hurley.lab:7051
+            - CORE_PEER_GOSSIP_ENDPOINT=peer0.org2.hurley.lab:7051
+            - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org2.hurley.lab:7051
+            - CORE_PEER_CHAINCODELISTENADDRESS=peer0.org2.hurley.lab:7052
+            - CORE_VM_DOCKER_ATTACHSTDOUT=true
+            - CORE_CHAINCODE_EXECUTETIMEOUT=60
+            - CORE_LOGGING_PEER=debug
+            - CORE_LOGGING_LEVELdebug
+            - CORE_LOGGING_GRPC=DEBUG
+            - CORE_CHAINCODE_LOGGING_LEVEL=DEBUG
+            - CORE_PEER_LOCALMSPID=org2MSP
+            - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org2.hurley.lab/msp
+            - CORE_PEER_GOSSIP_SKIPHANDSHAKE=true
+            - CORE_PEER_GOSSIP_ORGLEADER=false
+            - CORE_PEER_GOSSIP_USELEADERELECTION=true
+            - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
+            - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb.peer0.org2.hurley.lab:5984
+            - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
+            - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
+            - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=net_hurley_dev_net
+        working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+        command: peer node start --peer-chaincodedev=false
+        ports:
+            - 7151:7051
+            - 7152:7052
+            - 7153:7053
+        volumes:
+            - /var/run/:/host/var/run/
+            - /Users/luca/Projects/GitHubProjects/cloned/convector-example-supplychain-master/fabric-hurl/artifacts/crypto-config/peerOrganizations/org2.hurley.lab/peers/peer0.org2.hurley.lab/msp:/etc/hyperledger/msp/peer
+            - /Users/luca/Projects/GitHubProjects/cloned/convector-example-supplychain-master/fabric-hurl/artifacts/crypto-config/peerOrganizations/org2.hurley.lab/users:/etc/hyperledger/msp/users
+            - /Users/luca/Projects/GitHubProjects/cloned/convector-example-supplychain-master/fabric-hurl/artifacts/config:/etc/hyperledger/configtx
+            - shared:/shared
+        depends_on:
+            - orderer.hurley.lab
+            - couchdb.peer0.org2.hurley.lab
+        networks:
+            - hurley_dev_net
+
+    # Couch
+    couchdb.peer0.org2.hurley.lab:
+        container_name: couchdb.peer0.org2.hurley.lab
+        image: hyperledger/fabric-couchdb:0.4.13
+        environment:
+            - COUCHDB_USER=
+            - COUCHDB_PASSWORD=
+        ports:
+            - 5184:5984
+        networks:
+            - hurley_dev_net
+
+
+      
+volumes:
+  shared:
+
+  
+  

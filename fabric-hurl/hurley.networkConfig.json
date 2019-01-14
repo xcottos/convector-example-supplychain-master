@@ -1,0 +1,8 @@
+{
+  "organizations": 2,
+  "users": 1,
+  "channels": 1,
+  "path": "/Users/luca/Projects/GitHubProjects/cloned/convector-example-supplychain-master/fabric-hurl",
+  "hyperledgerVersion": "1.3.0",
+  "externalHyperledgerVersion": "0.4.13"
+}
