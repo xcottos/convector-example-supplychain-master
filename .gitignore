@@ -6,3 +6,4 @@ packages/supplychainchaincode-cc/client
 package-lock.json
 .DS_Store
 packages/supplychain-lb-4-app
+fabric-hurl/

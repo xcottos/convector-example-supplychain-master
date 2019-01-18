@@ -195,16 +195,19 @@ You will see that 2 files have been created:
 
 
 #### Models
+
 with the ``conv generate`` command we now generate the stubs of our Models.
 
+Now cd back to the root directory and run:
+
 ```
-conv generate model Supplier
-conv generate model Maufacturer
-conv generate model Distributor
-conv generate model Retailer
-conv generate model Customer
+conv generate model Supplier -c supplychainchaincode
+conv generate model Maufacturer -c supplychainchaincode
+conv generate model Distributor -c supplychainchaincode
+conv generate model Retailer -c supplychainchaincode
+conv generate model Customer -c supplychainchaincode
 ```
-You will see that now in the directory a file for each Model has been created:
+You will see that now in the directory ``cd packages/supplychainchaincode-cc/src`` a file for each Model has been created:
 
 ```
 Customer.model.ts
