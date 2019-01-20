@@ -926,7 +926,7 @@ npm run cc:invoke -- supplychainchaincode org1 user1 supplychainchaincode create
 
 This will invoke the method called **createSupplier** that we wrote in the **Controller** and will create a **Supplier** with id **SPL_1** that will be saved into the ledger.
 
-In the folder **packages/supplychainchaincode-cc/script/** there's a file called **testScript_sh.sh** that contains a script that:
+In the folder **packages/supplychainchaincode-cc/script/** there's a file called **testScript_sh.bash** that contains a script that:
 + restarts the dev-env environment (the Hyperledger nodes)
 + rebuild and reinstall the chaincode and gives it as version number 1
 + creates a scenario with:
