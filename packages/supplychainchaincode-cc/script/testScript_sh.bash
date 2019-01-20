@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #init
 cd ../../../
 lerna clean

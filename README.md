@@ -910,6 +910,14 @@ It takes as inputs 4 parameters:
 + user name
 + controller name
 
+**NOTE FOR LINUX USERS**
+most likely you have to force the /bin/bash as the default shell for the execution of the npm run scripts. In order to do that you have to run:
+
+```
+npm config set script-shell /bin/bash
+```
+
+
 In our case chaincode name and controller name are the same so a sample invocation is:
 ```
 npm run cc:invoke -- supplychainchaincode org1 user1 supplychainchaincode createSupplier '{"id":"SPL_1","name":"supplier1","rawMaterialAvailable":2000}'
@@ -931,9 +939,9 @@ In the folder **packages/supplychainchaincode-cc/script/** there's a file called
 where these entities interacts from the end to end: from the fetching of raw material until the selling of the products.
 + prints all the Models
 
-This happens running the script **testScript_sh.sh** with the command
+This happens running the script **testScript_sh.bash** with the command
 ```
-./testScript_sh.sh
+./testScript_sh.bash
 ```
 To read the messages written on the console via the invocations of the ``console.log``  function within the Controller, you need to connect to one of the peers that executes the chaincode.
 
