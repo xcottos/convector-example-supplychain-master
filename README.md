@@ -910,13 +910,22 @@ It takes as inputs 4 parameters:
 + user name
 + controller name
 
+
 **NOTE FOR LINUX USERS**
-most likely you have to force the /bin/bash as the default shell for the execution of the npm run scripts. In order to do that you have to run:
+
+You have to force the /bin/bash as the default shell for the execution of the npm run scripts since linux uses sh as default shell for npm run scripts. In order to do that you have to run:
 
 ```
 npm config set script-shell /bin/bash
 ```
 
+**NOTE FOR UBUNTU 18.04 USERS**
+
+if you already updated npm to the latest version and npm -v still gives you the wrong version (like 3.5.7) it's because of the cache of bash so you have to:
+
++ sudo apt purge npm
++ ln -s /usr/local/bin/npm /usr/bin/npm
++ npm config set script-shell /bin/bash
 
 In our case chaincode name and controller name are the same so a sample invocation is:
 ```

@@ -7,7 +7,7 @@ rm package-lock.json
 npm i
 npm run env:restart
 npm run cc:start -- supplychainchaincode  1
-sleep 5
+sleep 10
 npm run cc:invoke -- supplychainchaincode org1 user1 supplychainchaincode createSupplier '{"id":"SPL_1","name":"supplier1","rawMaterialAvailable":2000}'
 npm run cc:invoke -- supplychainchaincode org1 user1 supplychainchaincode createSupplier '{"id":"SPL_2","name":"supplier2","rawMaterialAvailable":3000}'
 npm run cc:invoke -- supplychainchaincode org1 user1 supplychainchaincode createManufacturer '{"id":"MNF_1","name":"manufacturer1","productsAvailable":0,"rawMaterialAvailable":0}'
