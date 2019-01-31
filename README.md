@@ -1061,7 +1061,7 @@ No cd into the packages directory and generate the skeleton of the app:
 yo express-no-stress-typescript supplychain-app
 ```
 
-it generates a folder called supplychain-app. Now we need to verify the skeleton has been correctly generated:
+it generates a folder called supplychain-app. Now we need to verify the skeleton has been correctly generated, in the supplychain-app folder:
 
 ```
 npx lerna run compile --scope supplychain-app
@@ -1069,7 +1069,7 @@ npx lerna run dev --scope supplychain-app --stream
 ```
 If there are no error messages it should already be possible to open http://localhost:3000 in the browser.
 
-Now we need to install some dependencies:
+Now we need to install some dependencies, so in the project root folder (convector-example-supplychain-master):
 
 To send transactions to the hyperledger fabric blockchain:
 
@@ -1121,7 +1121,7 @@ The tsconfig.json file will be then:
 For not replicate the model or the functions on the backend:
 
 ```
-npx lerna add supplychainchaincode-cc --scope supplychain-app
+npx lerna add supplychainchaincode-cc --scope supplychain-app --include-filtered-dependencies
 ```
 
 Now we need to edit the .env file that contains some environmental variables that have to match our configuration. It could be probably left as it is if no changes have been done to the project folder structure:
