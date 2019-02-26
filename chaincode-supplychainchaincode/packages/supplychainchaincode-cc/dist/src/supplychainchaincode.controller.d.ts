@@ -1,12 +1,10 @@
 import { ConvectorController } from '@worldsibu/convector-core-controller';
-import { Supplychainchaincode } from './supplychainchaincode.model';
 import { Supplier } from './Supplier.model';
 import { Manufacturer } from './Manufacturer.model';
 import { Distributor } from './Distributor.model';
 import { Retailer } from './Retailer.model';
 import { Customer } from './Customer.model';
 export declare class SupplychainchaincodeController extends ConvectorController {
-    create(supplychainchaincode: Supplychainchaincode): Promise<void>;
     createSupplier(supplier: Supplier): Promise<void>;
     createManufacturer(manufacturer: Manufacturer): Promise<void>;
     createDistributor(distributor: Distributor): Promise<void>;

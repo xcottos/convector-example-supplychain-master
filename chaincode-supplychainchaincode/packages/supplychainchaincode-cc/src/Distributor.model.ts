@@ -10,20 +10,11 @@ import {
 export class Distributor extends ConvectorModel<Distributor> {
   @ReadOnly()
   @Required()
-  public readonly type = 'io.worldsibu.Distributor';
+  public readonly type:string = 'io.worldsibu.Distributor';
 
   @Required()
   @Validate(yup.string())
   public name: string;
-
-  // @ReadOnly()
-  // @Required()
-  // @Validate(yup.number())
-  // public created: number;
-  //
-  // @Required()
-  // @Validate(yup.number())
-  // public modified: number;
 
   @Required()
   @Validate(yup.number())

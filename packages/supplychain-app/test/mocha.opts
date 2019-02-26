@@ -1,3 +1,0 @@
---compilers ts-node/register
---full-trace
---timeout 20000

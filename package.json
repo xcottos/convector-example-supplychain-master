@@ -1,32 +1,34 @@
 {
   "name": "supplychain",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Bootstrap project for Chaincodes supplychain",
   "files": [
     "dist/*"
   ],
   "scripts": {
     "install": "npm-run-all -s lerna:install",
-    "env:restart": "./node_modules/.bin/hurl new -p $PWD/fabric-hurl",
-    "env:clean": "./node_modules/.bin/hurl clean -p $PWD/fabric-hurl",
+    "build": "node ./update-paths.js",
+    "env:restart": "hurl new -p $PWD/fabric-hurl",
+    "test": "npm-run-all -s lerna:test",
+    "env:clean": "hurl clean -p $PWD/fabric-hurl",
     "cc:start": "f() { npm run cc:package -- $1 org1; npm run cc:install $1; }; f",
-    "cc:upgrade": "f() { npm run cc:package -- $1 org1; ./node_modules/.bin/hurl upgrade $1 node $2  -P ./chaincode-$1 -p $PWD/fabric-hurl; }; f",
+    "cc:upgrade": "f() { npm run cc:package -- $1 org1; hurl upgrade $1 node $2  -P ./chaincode-$1 -p $PWD/fabric-hurl; }; f",
     "===================INTERNALS===================": "===================NO NEED TO CALL THEM DIRECTLY===================",
     "lerna:install": "lerna bootstrap",
     "lerna:build": "lerna run build",
     "cc:package": "f() { npm run lerna:build; chaincode-manager --config ./$2.$1.config.json --output ./chaincode-$1 package; }; f",
-    "cc:install": "f() { ./node_modules/.bin/hurl install $1 node -P ./chaincode-$1 -p $PWD/fabric-hurl; }; f",
-    "cc:instantiate": "f() { chaincode-manager --config ./$3.$1.config.json instantiate $1 $2; }; f",
-    "cc:upgradePerOrg": "f() { chaincode-manager --config ./org1.$1.config.json upgrade $1 $2; }; f",
-    "cc:invoke": "f() { chaincode-manager --config ./$2.$1.config.json --user $3 invoke $1 ${@:4}; }; f"
+    "cc:install": "f() { hurl install $1 node -P ./chaincode-$1 -p $PWD/fabric-hurl; }; f",
+    "cc:invoke": "f() { chaincode-manager --config ./$2.$1.config.json --user $3 invoke $1 ${@:4}; }; f",
+    "lerna:test": "lerna exec npm run test"
   },
   "devDependencies": {
-    "lerna": "^3.4.3",
+    "lerna": "^3.13.0",
     "@worldsibu/convector-adapter-mock": "^1.2.0",
     "@worldsibu/convector-tool-chaincode-manager": "^1.2.0",
-    "fabric-ca-client": "~1.3.0",
-    "fabric-client": "~1.3.0",
+    "@worldsibu/convector-tool-dev-env": "^1.2.0",
+    "fabric-ca-client": "~1.4.0",
+    "fabric-client": "~1.4.0",
     "npm-run-all": "^4.1.5",
-    "@worldsibu/hurley": "^0.4.22"
+    "@worldsibu/hurley": "^0.5.0"
   }
 }

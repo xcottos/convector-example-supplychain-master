@@ -5,5 +5,6 @@ packages/supplychainchaincode-cc/dist
 packages/supplychainchaincode-cc/client
 package-lock.json
 .DS_Store
-packages/supplychain-lb-4-app
+packages/supplychainchaincode-app
 fabric-hurl/
+lerna-debug.log

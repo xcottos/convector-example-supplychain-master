@@ -42,8 +42,8 @@ npm run cc:invoke -- supplychainchaincode org1 user1 supplychainchaincode buyPro
 
 npm run cc:invoke -- supplychainchaincode org1 user1 supplychainchaincode getAllModels
 
-cd packages/supplychain-app
-npx lerna run compile --scope supplychain-app
-npx lerna run dev --scope supplychain-app --stream
+#cd packages/supplychain-app
+#npx lerna run compile --scope supplychain-app
+#npx lerna run dev --scope supplychain-app --stream
 
 #docker logs $(docker ps -qa | head -n 1) -f

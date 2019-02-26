@@ -6,12 +6,13 @@ import {
   Param
 } from '@worldsibu/convector-core-controller';
 
-import { Supplychainchaincode } from '../src/supplychainchaincode.model';
 import { Supplier } from '../src/Supplier.model';
 import { Manufacturer } from '../src/Manufacturer.model';
 import { Distributor } from '../src/Distributor.model';
 import { Retailer } from '../src/Retailer.model';
 import { Customer } from '../src/Customer.model';
+
+import { GetById, GetAll, Create, Service } from '@worldsibu/convector-rest-api';
 import { ControllerAdapter } from '@worldsibu/convector-core-adapter';
 
 
@@ -23,15 +24,6 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
   }
 
   
-  public async create(
-    
-    supplychainchaincode: Supplychainchaincode
-  ) {
-
-          return await this.adapter.invoke(this.name, 'create', this.user, supplychainchaincode);
-        
-  }
-
   
   public async createSupplier(
     
@@ -43,6 +35,7 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
   }
 
   
+  
   public async createManufacturer(
     
     manufacturer: Manufacturer
@@ -52,6 +45,7 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
         
   }
 
+  
   
   public async createDistributor(
     
@@ -63,6 +57,7 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
   }
 
   
+  
   public async createRetailer(
     
     retailer: Retailer
@@ -72,6 +67,7 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
         
   }
 
+  
   
   public async createCustomer(
     
@@ -83,6 +79,7 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
   }
 
   
+  
   public async getAllSuppliers()
   {
 
@@ -90,6 +87,7 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
         
   }
 
+  
   
   public async getSupplierById(
     
@@ -102,6 +100,7 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
   }
 
   
+  
   public async getAllManufacturers()
   {
 
@@ -109,6 +108,7 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
         
   }
 
+  
   
   public async getManufacturerById(
     
@@ -121,6 +121,7 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
   }
 
   
+  
   public async getAllDistributors()
   {
 
@@ -128,6 +129,7 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
         
   }
 
+  
   
   public async getDistributorById(
     
@@ -140,6 +142,7 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
   }
 
   
+  
   public async getAllRetailers()
   {
 
@@ -147,6 +150,7 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
         
   }
 
+  
   
   public async getRetailerById(
     
@@ -159,6 +163,7 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
   }
 
   
+  
   public async getAllCustomers()
   {
 
@@ -166,6 +171,7 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
         
   }
 
+  
   
   public async getCustomerById(
     
@@ -186,6 +192,7 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
   }
 
   
+  
   public async fetchRawMaterial(
     
     supplierId: string,
@@ -197,6 +204,7 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
         
   }
 
+  
   
   public async getRawMaterialFromSupplier(
     
@@ -212,6 +220,7 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
   }
 
   
+  
   public async createProducts(
     
     manufacturerId: string,
@@ -225,6 +234,7 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
         
   }
 
+  
   
   public async sendProductsToDistribution(
     
@@ -240,6 +250,7 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
   }
 
   
+  
   public async orderProductsFromDistributor(
     
     retailerId: string,
@@ -254,6 +265,7 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
   }
 
   
+  
   public async receiveProductsFromDistributor(
     
     retailerId: string,
@@ -267,6 +279,7 @@ export class SupplychainchaincodeControllerClient extends ConvectorController {
         
   }
 
+  
   
   public async buyProductsFromRetailer(
     

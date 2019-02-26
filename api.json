@@ -1,0 +1,41 @@
+{
+  "selected":"dev",
+  "environments": [
+    {
+      "name":"dev",
+      "PORT":"3000",
+      "LOG_LEVEL":"debug",
+      "REQUEST_LIMIT":"100kb",
+      "SESSION_SECRET":"mySecret",
+      "SWAGGER_API_SPEC":"/spec",
+      "KEYSTORE":"../../../fabric-hurl/.hfc-org1",
+      "USERCERT":"admin",
+      "ORGCERT":"org1",
+      "NETWORKPROFILE":"../../../fabric-hurl/network-profiles/org1.network-profile.yaml",
+      "CHANNEL":"ch1",
+      "CHAINCODE":"supplychainchaincode",
+      "COUCHDBVIEW":"ch1_supplychainchaincode",
+      "COUCHDB_PORT":"5984",
+      "COUCHDB_HOST":"localhost",
+      "COUCHDB_PROTOCOL":"http"
+    },
+    {
+      "name":"prod",
+      "PORT":"3000",
+      "LOG_LEVEL":"error",
+      "REQUEST_LIMIT":"100kb",
+      "SESSION_SECRET":"mySecret",
+      "SWAGGER_API_SPEC":"/spec",
+      "KEYSTORE":"../../../fabric-hurl/.hfc-org1",
+      "USERCERT":"admin",
+      "ORGCERT":"org1",
+      "NETWORKPROFILE":"../../../fabric-hurl/network-profiles/org1.network-profile.yaml",
+      "CHANNEL":"ch1",
+      "CHAINCODE":"supplychainchaincode",
+      "COUCHDBVIEW":"ch1_supplychainchaincode",
+      "COUCHDB_PORT":"5984",
+      "COUCHDB_HOST":"localhost",
+      "COUCHDB_PROTOCOL":"http"
+    }
+  ]
+}
