@@ -3,8 +3,8 @@ node_modules/
 chaincode/
 packages/supplychainchaincode-cc/dist
 packages/supplychainchaincode-cc/client
-package-lock.json
 .DS_Store
 packages/supplychainchaincode-app
 fabric-hurl/
 lerna-debug.log
+package-lock.json

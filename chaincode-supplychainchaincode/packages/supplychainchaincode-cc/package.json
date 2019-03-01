@@ -19,7 +19,7 @@
     "reflect-metadata": "^0.1.12",
     "@worldsibu/convector-core-model": "^1.2.0",
     "@worldsibu/convector-core-controller": "^1.2.0",
-    "@worldsibu/convector-rest-api": "^1.0.2"
+    "@worldsibu/convector-rest-api": "^1.0.3"
   },
   "devDependencies": {
     "@types/node": "^10.12.5",
