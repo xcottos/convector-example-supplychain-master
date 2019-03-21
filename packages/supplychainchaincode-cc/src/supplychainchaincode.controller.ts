@@ -6,13 +6,13 @@ import {
   Param
 } from '@worldsibu/convector-core-controller';
 
-import { Supplier } from './Supplier.model';
-import { Manufacturer } from './Manufacturer.model';
-import { Distributor } from './Distributor.model';
-import { Retailer } from './Retailer.model';
-import { Customer } from './Customer.model';
+import { Supplier } from './models/Supplier.model';
+import { Manufacturer } from './models/Manufacturer.model';
+import { Distributor } from './models/Distributor.model';
+import { Retailer } from './models/Retailer.model';
+import { Customer } from './models/Customer.model';
 
-import { GetById, GetAll, Create, Service } from '@worldsibu/convector-rest-api';
+import { GetById, GetAll, Create, Service } from '@worldsibu/convector-rest-api-decorators';
 
 @Controller('supplychainchaincode')
 export class SupplychainchaincodeController extends ConvectorController {

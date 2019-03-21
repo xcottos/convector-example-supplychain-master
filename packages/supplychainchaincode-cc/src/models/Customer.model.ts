@@ -15,7 +15,7 @@ export class Customer extends ConvectorModel<Customer> {
   @Required()
   @Validate(yup.string())
   public name: string;
-  
+
   @Required()
   @Validate(yup.number())
   public productsBought: number;

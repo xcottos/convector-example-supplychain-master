@@ -3,12 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tslib_1 = require("tslib");
 var yup = require("yup");
 var convector_core_controller_1 = require("@worldsibu/convector-core-controller");
-var Supplier_model_1 = require("./Supplier.model");
-var Manufacturer_model_1 = require("./Manufacturer.model");
-var Distributor_model_1 = require("./Distributor.model");
-var Retailer_model_1 = require("./Retailer.model");
-var Customer_model_1 = require("./Customer.model");
-var convector_rest_api_1 = require("@worldsibu/convector-rest-api");
+var Supplier_model_1 = require("./models/Supplier.model");
+var Manufacturer_model_1 = require("./models/Manufacturer.model");
+var Distributor_model_1 = require("./models/Distributor.model");
+var Retailer_model_1 = require("./models/Retailer.model");
+var Customer_model_1 = require("./models/Customer.model");
+var convector_rest_api_decorators_1 = require("@worldsibu/convector-rest-api-decorators");
 var SupplychainchaincodeController = (function (_super) {
     tslib_1.__extends(SupplychainchaincodeController, _super);
     function SupplychainchaincodeController() {
@@ -392,72 +392,72 @@ var SupplychainchaincodeController = (function (_super) {
         });
     };
     tslib_1.__decorate([
-        convector_rest_api_1.Create('Supplier'),
+        convector_rest_api_decorators_1.Create('Supplier'),
         convector_core_controller_1.Invokable(),
         tslib_1.__param(0, convector_core_controller_1.Param(Supplier_model_1.Supplier))
     ], SupplychainchaincodeController.prototype, "createSupplier", null);
     tslib_1.__decorate([
-        convector_rest_api_1.Create('Manufacturer'),
+        convector_rest_api_decorators_1.Create('Manufacturer'),
         convector_core_controller_1.Invokable(),
         tslib_1.__param(0, convector_core_controller_1.Param(Manufacturer_model_1.Manufacturer))
     ], SupplychainchaincodeController.prototype, "createManufacturer", null);
     tslib_1.__decorate([
-        convector_rest_api_1.Create('Distributor'),
+        convector_rest_api_decorators_1.Create('Distributor'),
         convector_core_controller_1.Invokable(),
         tslib_1.__param(0, convector_core_controller_1.Param(Distributor_model_1.Distributor))
     ], SupplychainchaincodeController.prototype, "createDistributor", null);
     tslib_1.__decorate([
-        convector_rest_api_1.Create('Retailer'),
+        convector_rest_api_decorators_1.Create('Retailer'),
         convector_core_controller_1.Invokable(),
         tslib_1.__param(0, convector_core_controller_1.Param(Retailer_model_1.Retailer))
     ], SupplychainchaincodeController.prototype, "createRetailer", null);
     tslib_1.__decorate([
-        convector_rest_api_1.Create('Customer'),
+        convector_rest_api_decorators_1.Create('Customer'),
         convector_core_controller_1.Invokable(),
         tslib_1.__param(0, convector_core_controller_1.Param(Customer_model_1.Customer))
     ], SupplychainchaincodeController.prototype, "createCustomer", null);
     tslib_1.__decorate([
-        convector_rest_api_1.GetAll('Supplier'),
+        convector_rest_api_decorators_1.GetAll('Supplier'),
         convector_core_controller_1.Invokable()
     ], SupplychainchaincodeController.prototype, "getAllSuppliers", null);
     tslib_1.__decorate([
-        convector_rest_api_1.GetById('Supplier'),
+        convector_rest_api_decorators_1.GetById('Supplier'),
         convector_core_controller_1.Invokable(),
         tslib_1.__param(0, convector_core_controller_1.Param(yup.string()))
     ], SupplychainchaincodeController.prototype, "getSupplierById", null);
     tslib_1.__decorate([
-        convector_rest_api_1.GetAll('Manufacturer'),
+        convector_rest_api_decorators_1.GetAll('Manufacturer'),
         convector_core_controller_1.Invokable()
     ], SupplychainchaincodeController.prototype, "getAllManufacturers", null);
     tslib_1.__decorate([
-        convector_rest_api_1.GetById('Manufacturer'),
+        convector_rest_api_decorators_1.GetById('Manufacturer'),
         convector_core_controller_1.Invokable(),
         tslib_1.__param(0, convector_core_controller_1.Param(yup.string()))
     ], SupplychainchaincodeController.prototype, "getManufacturerById", null);
     tslib_1.__decorate([
-        convector_rest_api_1.GetAll('Distributor'),
+        convector_rest_api_decorators_1.GetAll('Distributor'),
         convector_core_controller_1.Invokable()
     ], SupplychainchaincodeController.prototype, "getAllDistributors", null);
     tslib_1.__decorate([
-        convector_rest_api_1.GetById('Distributor'),
+        convector_rest_api_decorators_1.GetById('Distributor'),
         convector_core_controller_1.Invokable(),
         tslib_1.__param(0, convector_core_controller_1.Param(yup.string()))
     ], SupplychainchaincodeController.prototype, "getDistributorById", null);
     tslib_1.__decorate([
-        convector_rest_api_1.GetAll('Retailer'),
+        convector_rest_api_decorators_1.GetAll('Retailer'),
         convector_core_controller_1.Invokable()
     ], SupplychainchaincodeController.prototype, "getAllRetailers", null);
     tslib_1.__decorate([
-        convector_rest_api_1.GetById('Retailer'),
+        convector_rest_api_decorators_1.GetById('Retailer'),
         convector_core_controller_1.Invokable(),
         tslib_1.__param(0, convector_core_controller_1.Param(yup.string()))
     ], SupplychainchaincodeController.prototype, "getRetailerById", null);
     tslib_1.__decorate([
-        convector_rest_api_1.GetAll('Customer'),
+        convector_rest_api_decorators_1.GetAll('Customer'),
         convector_core_controller_1.Invokable()
     ], SupplychainchaincodeController.prototype, "getAllCustomers", null);
     tslib_1.__decorate([
-        convector_rest_api_1.GetById('Customer'),
+        convector_rest_api_decorators_1.GetById('Customer'),
         convector_core_controller_1.Invokable(),
         tslib_1.__param(0, convector_core_controller_1.Param(yup.string()))
     ], SupplychainchaincodeController.prototype, "getCustomerById", null);
@@ -465,48 +465,48 @@ var SupplychainchaincodeController = (function (_super) {
         convector_core_controller_1.Invokable()
     ], SupplychainchaincodeController.prototype, "getAllModels", null);
     tslib_1.__decorate([
-        convector_rest_api_1.Service(),
+        convector_rest_api_decorators_1.Service(),
         convector_core_controller_1.Invokable(),
         tslib_1.__param(0, convector_core_controller_1.Param(yup.string())),
         tslib_1.__param(1, convector_core_controller_1.Param(yup.number()))
     ], SupplychainchaincodeController.prototype, "fetchRawMaterial", null);
     tslib_1.__decorate([
-        convector_rest_api_1.Service(),
+        convector_rest_api_decorators_1.Service(),
         convector_core_controller_1.Invokable(),
         tslib_1.__param(0, convector_core_controller_1.Param(yup.string())),
         tslib_1.__param(1, convector_core_controller_1.Param(yup.string())),
         tslib_1.__param(2, convector_core_controller_1.Param(yup.number()))
     ], SupplychainchaincodeController.prototype, "getRawMaterialFromSupplier", null);
     tslib_1.__decorate([
-        convector_rest_api_1.Service(),
+        convector_rest_api_decorators_1.Service(),
         convector_core_controller_1.Invokable(),
         tslib_1.__param(0, convector_core_controller_1.Param(yup.string())),
         tslib_1.__param(1, convector_core_controller_1.Param(yup.number())),
         tslib_1.__param(2, convector_core_controller_1.Param(yup.number()))
     ], SupplychainchaincodeController.prototype, "createProducts", null);
     tslib_1.__decorate([
-        convector_rest_api_1.Service(),
+        convector_rest_api_decorators_1.Service(),
         convector_core_controller_1.Invokable(),
         tslib_1.__param(0, convector_core_controller_1.Param(yup.string())),
         tslib_1.__param(1, convector_core_controller_1.Param(yup.string())),
         tslib_1.__param(2, convector_core_controller_1.Param(yup.number()))
     ], SupplychainchaincodeController.prototype, "sendProductsToDistribution", null);
     tslib_1.__decorate([
-        convector_rest_api_1.Service(),
+        convector_rest_api_decorators_1.Service(),
         convector_core_controller_1.Invokable(),
         tslib_1.__param(0, convector_core_controller_1.Param(yup.string())),
         tslib_1.__param(1, convector_core_controller_1.Param(yup.string())),
         tslib_1.__param(2, convector_core_controller_1.Param(yup.number()))
     ], SupplychainchaincodeController.prototype, "orderProductsFromDistributor", null);
     tslib_1.__decorate([
-        convector_rest_api_1.Service(),
+        convector_rest_api_decorators_1.Service(),
         convector_core_controller_1.Invokable(),
         tslib_1.__param(0, convector_core_controller_1.Param(yup.string())),
         tslib_1.__param(1, convector_core_controller_1.Param(yup.string())),
         tslib_1.__param(2, convector_core_controller_1.Param(yup.number()))
     ], SupplychainchaincodeController.prototype, "receiveProductsFromDistributor", null);
     tslib_1.__decorate([
-        convector_rest_api_1.Service(),
+        convector_rest_api_decorators_1.Service(),
         convector_core_controller_1.Invokable(),
         tslib_1.__param(0, convector_core_controller_1.Param(yup.string())),
         tslib_1.__param(1, convector_core_controller_1.Param(yup.string())),

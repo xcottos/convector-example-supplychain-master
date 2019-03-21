@@ -51,11 +51,13 @@ The following paragraphs describe the procedure to generate this  project from t
 
 First, the convector-cli package must be installed globally:
 
+**Attention!**: There just was an update of **@worldsibu/convector** to the **1.3** version and the **@worldsibu/convector-cli** to the **1.1.2** version. **This document won't work with earlier versions**.
+
 ``
 npm i -g @worldsibu/convector-cli
 ``
 
-Second, hurley package must be installed globally, it will provide an easy way to setup an Hyperledger Fabric 1.3 network:
+Second, hurley package must be installed globally, it will provide an easy way to setup an Hyperledger Fabric 1.4 network:
 
 ``
 npm i -g @worldsibu/hurley
@@ -89,7 +91,7 @@ so at the end your file should look like
 {
   "name": "supplychain",
   "version": "0.2.0",
-  "description": "Bootstrap project for Chaincodes supplychain",
+  "description": "Bootstrap project for Chaincodes testNew",
   "files": [
     "dist/*"
   ],
@@ -111,13 +113,12 @@ so at the end your file should look like
   },
   "devDependencies": {
     "lerna": "^3.13.0",
-    "@worldsibu/convector-adapter-mock": "^1.2.0",
-    "@worldsibu/convector-tool-chaincode-manager": "^1.2.0",
-    "@worldsibu/convector-tool-dev-env": "^1.2.0",
+    "@worldsibu/convector-adapter-mock": "~1.3.0",
+    "@worldsibu/convector-platform-fabric": "~1.3.0",
+    "@worldsibu/hurley": "~1.0.0",
     "fabric-ca-client": "~1.4.0",
     "fabric-client": "~1.4.0",
-    "npm-run-all": "^4.1.5",
-    "@worldsibu/hurley": "^0.5.0"
+    "npm-run-all": "^4.1.5"
   }
 }
 ```
@@ -138,7 +139,7 @@ found 30 vulnerabilities (10 low, 10 moderate, 10 high)
 
 However this is something I will go in deep in the future.
 
-The chaincode will be deployed on a Hyperledger Fabric 1.3 network defined and ran by **hurley** whose specific folder is called **fabric-hurl** and is located in the home directory of this project; the **hurl** command is executed by the scripts defined in the **package.json** file. Anyway since the **fabric-client** and **fabric-ca-client** are peer dependencies the code can be ran on existing instances without problems. (I will update this project with that part in the future)
+The chaincode will be deployed on a Hyperledger Fabric 1.4 network defined and ran by **hurley** whose specific folder is called **fabric-hurl** and is located in the home directory of this project; the **hurl** command is executed by the scripts defined in the **package.json** file. Anyway since the **fabric-client** and **fabric-ca-client** are peer dependencies the code can be ran on existing instances without problems. (I will update this project with that part in the future)
 
 Then to check if the skeleton is working:
 
@@ -164,19 +165,19 @@ At the end you should receive something like:
 
 [hurley] - You can find the network topology (ports, names) here: /Users/luca/Projects/GitHubProjects/cloned/convector-example-supplychain-master/fabric-hurl/docker-compose.yaml
 ```
-What happened during the execution of the dommand is that the **Hyperledger Fabric 1.3.0** infrastructure has been started
+What happened during the execution of the command is that the **Hyperledger Fabric 1.4.0** infrastructure has been started
 
 running the ``docker ps -a`` command:
 
 ```
 CONTAINER ID        IMAGE                                                                                                                 COMMAND                  CREATED             STATUS              PORTS                                                                    NAMES
-2fb4dd45ad15        hyperledger/fabric-peer:1.3.0                                                                                         "peer node start --p…"   3 minutes ago        Up 3 minutes        0.0.0.0:7051-7053->7051-7053/tcp                                         peer0.org1.hurley.lab
-903fbda584fa        hyperledger/fabric-peer:1.3.0                                                                                         "peer node start --p…"   3 minutes ago        Up 3 minutes        0.0.0.0:7151->7051/tcp, 0.0.0.0:7152->7052/tcp, 0.0.0.0:7153->7053/tcp   peer0.org2.hurley.lab
-5e3663051931        hyperledger/fabric-couchdb:0.4.13                                                                                     "tini -- /docker-ent…"   3 minutes ago        Up 3 minutes        4369/tcp, 9100/tcp, 0.0.0.0:5084->5984/tcp                               couchdb.peer0.org1.hurley.lab
-74da099e0dd7        hyperledger/fabric-ca:1.3.0                                                                                           "fabric-ca-server st…"   3 minutes ago        Up 3 minutes        0.0.0.0:7154->7054/tcp                                                   ca.org2.hurley.lab
-0e16c6344f64        hyperledger/fabric-orderer:1.3.0                                                                                      "orderer"                3 minutes ago        Up 3 minutes        0.0.0.0:7050->7050/tcp                                                   orderer.hurley.lab
-a8f11f04ecd3        hyperledger/fabric-ca:1.3.0                                                                                           "fabric-ca-server st…"   3 minutes ago        Up 3 minutes        0.0.0.0:7054->7054/tcp                                                   ca.org1.hurley.lab
-a2344f1fa996        hyperledger/fabric-couchdb:0.4.13                                                                                     "tini -- /docker-ent…"   3 minutes ago        Up 3 minutes        4369/tcp, 9100/tcp, 0.0.0.0:5184->5984/tcp                               couchdb.peer0.org2.hurley.lab
+9689cb760462        hyperledger/fabric-peer:1.4.0                                                                                         "peer node start --p…"   About an hour ago   Up About an hour    0.0.0.0:7051-7053->7051-7053/tcp                                         peer0.org1.hurley.lab
+7333bb820374        hyperledger/fabric-peer:1.4.0                                                                                         "peer node start --p…"   About an hour ago   Up About an hour    0.0.0.0:7151->7051/tcp, 0.0.0.0:7152->7052/tcp, 0.0.0.0:7153->7053/tcp   peer0.org2.hurley.lab
+6c07fed50b69        hyperledger/fabric-ca:1.4.0                                                                                           "fabric-ca-server st…"   About an hour ago   Up About an hour    0.0.0.0:7154->7054/tcp                                                   ca.org2.hurley.lab
+382b08596a70        hyperledger/fabric-ca:1.4.0                                                                                           "fabric-ca-server st…"   About an hour ago   Up About an hour    0.0.0.0:7054->7054/tcp                                                   ca.org1.hurley.lab
+2f721919bd7e        hyperledger/fabric-couchdb:0.4.14                                                                                     "tini -- /docker-ent…"   About an hour ago   Up About an hour    4369/tcp, 9100/tcp, 0.0.0.0:5184->5984/tcp                               couchdb.peer0.org2.hurley.lab
+abe4eadac764        hyperledger/fabric-couchdb:0.4.14                                                                                     "tini -- /docker-ent…"   About an hour ago   Up About an hour    4369/tcp, 9100/tcp, 0.0.0.0:5084->5984/tcp                               couchdb.peer0.org1.hurley.lab
+2bb40eec25e7        hyperledger/fabric-orderer:1.4.0                                                                                      "orderer"                About an hour ago   Up About an hour    0.0.0.0:7050->7050/tcp                                                   orderer.hurley.lab
 ```
 
 We can see there is:
@@ -226,7 +227,12 @@ Manufacturer.model.ts
 Retailer.model.ts
 Supplier.model.ts
 ```
+
+**NOTE:** The **@worldsibu/convector-cli** now changes the case of the model name to  **Camel** case, so the files could be named like **customer.model.ts**. What's important is to remember to update the **index.ts** accordingly if changing the generated names.
+
 These files are written using Typescript language ([https://www.typescriptlang.org](https://www.typescriptlang.org)) that is expressive and generic enough for being used as a base of code generation (in this case the javascript code)
+
+**NOTE:** In the github project you can notice I moved the models into a **models** folder. This is up to you, just remember to update the **index.ts** accordingly.
 
 Opening each of them (i.e. Supplier.model.ts), you will see that there are also the properties **created** and **modified**. I decided to comment them out and to deal with them in the future.
 
@@ -507,9 +513,17 @@ import {
   getValidatedProperties
 } from '../src/validate.decorator';
 
-export type FlatConvectorModel<T> = {
-  [L in Exclude<keyof T, keyof ConvectorModel<any>>]: T[L]
-};
+export type RequiredKeys<T> = { [K in keyof T]-?:
+  string extends K ? never : number extends K ? never : {} extends Pick<T, K> ? never : K
+} extends { [_ in keyof T]-?: infer U } ? U extends keyof T ? U : never : never;
+
+export type OptionalKeys<T> = { [K in keyof T]-?:
+  string extends K ? never : number extends K ? never : {} extends Pick<T, K> ? K : never
+} extends { [_ in keyof T]-?: infer U } ? U extends keyof T ? U : never : never;
+
+export declare type FlatConvectorModel<T> =
+  {[L in Exclude<OptionalKeys<T>, keyof ConvectorModel<any>>]?: T[L]} &
+  {[L in Exclude<RequiredKeys<T>, keyof ConvectorModel<any>>]: T[L]};
 
 export interface History<T> {
   value: T;
@@ -523,15 +537,15 @@ export interface History<T> {
  * It provides the underlying communication with the [[BaseStorage]].
  */
 export abstract class ConvectorModel<T extends ConvectorModel<any>> {
-  public static schema<T extends ConvectorModel<any>>(
-    this: new (...args: any[]) => T
-  ): yup.ObjectSchema<FlatConvectorModel<T>&{id:string,type:string}> {
-    const instance = new this();
+  private static type = 'io.convector.model';
 
+  public static schema<T extends ConvectorModel<any>>(
+    this: Function&{prototype: T}
+  ): yup.ObjectSchema<FlatConvectorModel<T>&{id:string,type:string}> {
     return yup.object<FlatConvectorModel<T>&{id:string,type:string}>().shape({
       id: yup.string().required(),
       type: yup.string(),
-      ...getPropertiesValidation(instance)
+      ...getPropertiesValidation(this.prototype)
     } as any);
   }
 
@@ -545,11 +559,19 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
   public static async getOne<T extends ConvectorModel<any>>(
     this: new (content: any) => T,
     id: string,
-    type?: new (content: any) => T
+    type?: new (content: any) => T,
+    storageOptions?: any
   ): Promise<T> {
     type = type || this;
-    const content = await BaseStorage.current.get(id);
-    return new type(content);
+    const content = await BaseStorage.current.get(id, storageOptions);
+
+    const model = new type(content);
+
+    if ((content && model) && content.type !== model.type) {
+      throw new Error(`Possible ID collision, element ${id} of type ${content.type} is not ${model.type}`);
+    }
+
+    return model;
   }
 
   /**
@@ -564,7 +586,7 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
     let type = this;
 
     // Stupid horrible hack to find the current implementation's parent type
-    if (args[0] && args[0].prototype.__proto__.constructor === ConvectorModel) {
+    if (args[0] && 'type' in args[0] && args[0].type === ConvectorModel.type) {
       type = args.shift();
     }
 
@@ -642,8 +664,8 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
   /**
    * Invokes the [[BaseStorage.get]] method to retrieve the model from storage.
    */
-  public async fetch() {
-    const content = await BaseStorage.current.get(this.id) as ConvectorModel<T>;
+  public async fetch(storageOptions?: any) {
+    const content = await BaseStorage.current.get(this.id, storageOptions) as ConvectorModel<T>;
 
     if (content.type !== this.type) {
       throw new Error(`Possible ID collision, element ${this.id} of type ${content.type} is not ${this.type}`);
@@ -664,8 +686,10 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
 
   /**
    * Invokes the [[BaseStorage.set]] method to write into chaincode.
+   *
+   * @param storageOptions Extra options to pass to the storage layer. The type depends on the storage
    */
-  public async save() {
+  public async save(storageOptions?: any) {
     this.assign(getDefaults(this), true);
     if (!ensureRequired(this)) {
       if (!this.id) {
@@ -677,7 +701,7 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
     }
 
     InvalidIdError.test(this.id);
-    await BaseStorage.current.set(this.id, this);
+    await BaseStorage.current.set(this.id, this, storageOptions);
   }
 
   /**
@@ -710,12 +734,13 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
         .map(key => [key, Object.getOwnPropertyDescriptor(proto, key)])
     ], []);
 
+    // debugger;
     const base = Object.keys(this).concat('id')
       .filter(k => !k.startsWith('_'))
-      .filter(k => !skipEmpty || this[k] !== undefined || this[k] !== null)
+      .filter(k => !skipEmpty || !(this[k] === undefined || this[k] === null))
       .reduce((result, key) => ({ ...result, [key]: this[key] }), {});
 
-      return descriptors
+    return descriptors
       .reduce((result, [key, desc]) => {
         const hasGetter = desc && typeof desc.get === 'function';
 
@@ -728,6 +753,10 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
           delete result[key];
         }
 
+        if (result[key] instanceof ConvectorModel) {
+          result[key] = result[key].toJSON(true);
+        }
+
         return result;
       }, base);
   }
@@ -738,8 +767,8 @@ export abstract class ConvectorModel<T extends ConvectorModel<any>> {
    * Notice that there's no such a concept as **delete** in the blockchain,
    * so what this does is to remove all the reachable references to the model.
    */
-  public async delete() {
-    await BaseStorage.current.delete(this.id);
+  public async delete(storageOptions?: any) {
+    await BaseStorage.current.delete(this.id, storageOptions);
   }
 
   /**
@@ -1162,8 +1191,8 @@ Instantiated Chaincode at org1
 
 Running now the command ``docker ps -a`` you should notice that there are 2 new containers:
 ```
-b50fc1d200e2        dev-peer0.org2.hurley.lab-supplychainchaincode-1.0-982db5386d51b5f5bf00ddc0470aff5e11fa77d9a5409fd6991eb7791002a5c3   "/bin/sh -c 'cd /usr…"   55 seconds ago       Up 54 seconds                                                                                dev-peer0.org2.hurley.lab-supplychainchaincode-1.0
-0ecc2a708a0b        dev-peer0.org1.hurley.lab-supplychainchaincode-1.0-5aea7809261e79ace2a874a1d67b3a998cccc93ce6142f80105dfa2abaa958f5   "/bin/sh -c 'cd /usr…"   About a minute ago   Up About a minute                                                                            dev-peer0.org1.hurley.lab-supplychainchaincode-1.0
+2a488ae54b4d        dev-peer0.org2.hurley.lab-supplychainchaincode-1.0-982db5386d51b5f5bf00ddc0470aff5e11fa77d9a5409fd6991eb7791002a5c3   "/bin/sh -c 'cd /usr…"   About an hour ago   Up About an hour                                                                             dev-peer0.org2.hurley.lab-supplychainchaincode-1.0
+807e9ed0d7c9        dev-peer0.org1.hurley.lab-supplychainchaincode-1.0-5aea7809261e79ace2a874a1d67b3a998cccc93ce6142f80105dfa2abaa958f5   "/bin/sh -c 'cd /usr…"   About an hour ago   Up About an hour                                                                             dev-peer0.org1.hurley.lab-supplychainchaincode-1.0
 ```
 That are the 2 containers, one per organization, called ``dev-peer0.org2.hurley.lab-supplychainchaincode-1.0`` and ``dev-peer0.org1.example.com-supplychainchaincode-1.0``  that are running the chaincode.
 
@@ -1226,11 +1255,11 @@ To read the messages written on the console via the invocations of the ``console
 
 This is done with the command ``docker logs`` that accepts as parameter the id of the container that you saw as part of the output of the ``docker ps -a`` command.
 
-In our scenario we use **b50fc1d200e2** that corresponds to **dev-peer0.org2.example.com-supplychainchaincode-1**
+In our scenario we use **2a488ae54b4d** that corresponds to **dev-peer0.org2.example.com-supplychainchaincode-1**
 
 so the command will be:
 ```
-docker logs b50fc1d200e2 -f
+docker logs 2a488ae54b4d -f
 ```
 Running this command you will see all the logs of the container in real time. It will show also all the past logs.
 
